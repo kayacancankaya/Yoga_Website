@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewData["Title"] = "Classes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Pan.Models.DbClasses.ViewModels.ClassListsViewModel
+
+
+@section Title{
+    <title>Tüm Kurslar</title>
+}
+@section KeywordsandDescription{
+    <meta name="keywords" content="Yoga Eğitimi,Online Pilates Eğitimi,Online Yoga Kursu,Yoga Challenge,Pilates Eğitimi,Aletli Reformer">
+    <meta name="description" content="Tüm yoga,pilates ve diğer sporlara ait online,yerinde kursları içerir.">
+}
+
+<!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+
+<div class="breadcrumbs-wrap">
+
+    <div class="container">
+
+        <h1 class="page-title">Tüm Kurslar</h1>
+
+        <ul class="breadcrumbs">
+
+            <li><a asp-controller="Home" asp-action="Index" asp-route-id="@DateTime.Now.ToString("dd.MM.yyyy")">Ana Sayfa</a></li>
+            <li>Tüm Kurslar</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- - - - - - - - - - - - - end Breadcrumbs - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - Content - - - - - - - - - - - - - - - - -->
+
+<div id="content" class="page-content-wrap">
+
+    <div class="container">
+
+        <div class="content-element6">
+
+            <div class="content-element3">
+
+                <form>
+
+                    <input type="text" onblur="searchBoxLostFocus" placeholder="Kurs Ara">
+
+                </form>
+
+            </div>
+
+            <div class="content-element3">
+
+                <div class="classes-option flex-row align-items-end">
+
+                    <form>
+
+                        <label>Seviye</label>
+                        <div class="mad-custom-select">
+                            <select data-default-text="Tüm Seviyeler" id="levelsDropdown">
+                                <option>Başlangıç</option>
+                                <option>Orta</option>
+                                <option>İleri</option>
+                                <option>Eğitmen</option>
+                                <option>Tümü</option>
+                            </select>
+                        </div>
+                    </form>
+                    <form>
+                        <label>Eğitmen</label>
+                        <div class="mad-custom-select">
+                            <select data-default-text="Tüm Eğitmenler" id="teachersDropdown">
+                                @{
+                                    var teachers = @Model.Instructors.Select(i => string.Join(" ",i.FirstName,i.SecondName,i.LastName).Trim()).Distinct().ToList();
+                                    foreach (var item in teachers)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                    </form>
+                    <form>
+                        <label>Kurs Tipi</label>
+                        <div class="mad-custom-select">
+                            <select data-default-text="Tüm Tipler" id="classTypesDropdown">
+                                @{
+                                    var classTypes = @Model.ClassTypes.Select(n => n.ClassName).Distinct().ToList();
+                                    foreach (var item in classTypes)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </form>
+                    <form>
+                        <label>Şehir</label>
+                        <div class="mad-custom-select">
+                            <select data-default-text="Tüm Şehirler" id="citiesDropdown">
+                                @{
+                                    var cities = @Model.Locations.Select(c => c.City).Distinct().ToList();
+                                    foreach (var item in cities)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                    </form>
+                    <form>
+                        <label>Stüdyo</label>
+                        <div class="mad-custom-select">
+                            <select data-default-text="Tüm Stüdyolar" id="studiosDropdown">
+                                @{
+                                    var studios = @Model.Locations.Select(n => n.LocationName).Distinct().ToList();
+                                    foreach (var item in studios)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                    </form>
+
+                    <div>
+                        <a id="searchButton" class="btn btn-big btn-style-3">Ara</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="content-element6">
+            <div class="entry-box flex-row item-col-3">
+                @foreach(var item in Model.ClassesMaster)
+                {
+                <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
+                <div class="entry-col">
+                    <div class="entry">
+
+                        <!-- - - - - - - - - - - - - - Entry attachment - - - - - - - - - - - - - - - - -->
+                        <div class="thumbnail-attachment video-holder">
+                             <img src="@(!string.IsNullOrEmpty(item.Photopath1) ? Url.Content($"~/images/Classes/{item.ClassName}{item.ClassMasterID}/{item.Photopath1}") : Url.Content("~/images/Classes/default_class_picture.jpg"))" style="width:300px;height:200px;" alt="@item.ClassName">
+                                <div class="overlay"><a href="https://www.youtube.com/watch?v=KtI_P1ulii4&t=10s" class="video-btn size-2" data-fancybox="video"></a></div>
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - Entry body - - - - - - - - - - - - - - - - -->
+                        <div class="entry-body">
+
+                            <h6 class="entry-title"><a href="#">@item.ClassTitle</a></h6>
+                            <div class="flex-row justify-content-between align-items-center">
+                                <div class="entry-meta">
+
+                                        <a asp-controller="Home" asp-action="Instructor" asp-route-id="@item.InstructorID">
+                                            @Model.Instructors.Where(i=>i.InstructorID == item.InstructorID).Select(n => string.Join(" ",n.FirstName,n.SecondName,n.LastName).Trim()).FirstOrDefault()
+                                        </a>
+                                    <span>ile</span>
+                                        <a asp-controller="Home" asp-action="Classes" asp-route-id="@Model.Classes.Where(i=>i.ClassMasterID == item.ClassMasterID).Select(i => i.ClassID).FirstOrDefault()" class="entry-cat">@item.ClassName</a>
+
+                                </div>
+                                <div class="our-info">
+
+                                    <div class="info-item">
+                                        <i class="licon-clock3"></i>
+                                        <div class="wrapper">
+                                                <span>
+                                                    @Model.Classes.Where(i=>i.ClassMasterID == item.ClassMasterID).Select(d => d.DurationMinutes.ToString()).FirstOrDefault()
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="licon-signal"></i>
+                                        <div class="wrapper">
+                                                <span>@item.Level</span>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="licon-home"></i>
+                                            <div class="wrapper">
+                                                <a asp-controller="Home" asp-action="Location" asp-route-id="@item.LocationID">
+                                                    @Model.Locations.Where(i=>i.LocationID == item.LocationID).Select(s => s.LocationName).FirstOrDefault()
+                                                </a>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="licon-city"></i>
+                                            <div class="wrapper">
+                                                <span>
+                                                    @Model.Locations.Where(i=>i.LocationID == item.LocationID).Select(s => s.City).FirstOrDefault()
+                                                </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        @if (Math.Floor(Convert.ToDecimal(Model.ClassesMaster.Count / Model.NumberOfClassesPerPage)) > 1)
+        {
+            <div class="align-center">
+
+                <ul class="pagination">
+                    <li ><a href="#" class="prev-page"></a></li>
+                    @{
+                        int totalPages = Convert.ToInt32(Math.Floor(Convert.ToDecimal(Model.ClassesMaster.Count / Model.NumberOfClassesPerPage)));
+                        for(int i=1;i<=totalPages;i++)
+                        {
+                            //active should be added as class to the list according to the current page status
+                            <li><a href="#">@i</a></li>
+                        }
+                    }
+                
+                <li><a href="#" class="next-page"></a></li>
+            </ul>
+
+        </div>
+        }
+    </div>
+
+</div>
+
+<!-- - - - - - - - - - - - - end Content - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - -->

@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewData["Title"] = "KatilimciKursKaydi";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+@model Pan.Models.DbClasses.ViewModels.ClassAttendeeViewModel
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Katılımcı Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="KursListesi">Kurs Listesi</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="KursKatilimListesi">Kurs Katılım Listesi</a></li>
+                    <li class="breadcrumb-item active">Katılımcı Kayıt</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">@Model.ClassName</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="ClassType" ></label>
+                                        <p>@Model.ClassType</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="InstructorName"></label>
+                                        <p>@Model.InstructorName</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="LocationName"></label>
+                                        <p>@Model.LocationName</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="MaxCapacity"></label>
+                                        <p>@Model.MaxCapacity</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <form>
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label asp-for="Attendees" style="padding:10px;"></label>
+                                            <select class="form-control rounded-0" asp-for="BeRegisteredAttendee" style="width: 100%;">
+                                                @foreach (var attendees in Model.Attendees)
+                                                {
+                                                    <option>@attendees</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container" style="margin-left: 0; margin-bottom: 10px; background-color: lavender">
+                                <label style="padding: 10px;">Kurs Takvimi</label>
+
+                                <div class="row">
+
+                                    <div class="col-lg-8 ">
+                                        <div class="form-group clearfix">
+                                            
+                                                @foreach (var currentAttendance in Model.CurrentAttandence)
+                                                {
+                                                <div class="icheck-primary d-block" style="margin:10px;">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <input class="beRegisteredCourse_" type="checkbox"
+                                                                       data-date="@currentAttendance.Key.ToString("yyyy-MM-dd HH:mm:ss")"
+                                                                        @(currentAttendance.Key >= DateTime.Now ? "checked='checked'" : "")
+                                                                       style="display:inline;" />
+
+                                                                <p style="display:inline;">Kurs Tarihi: <span style="color: @(currentAttendance.Key >= DateTime.Now ? "green" : "red"); font-weight: bold;">@currentAttendance.Key</span></p>
+                                                            </div>
+                                                                <div class="col-6">
+                                                                <p style="display:inline;">Mevcut Katılım: <span style=" color: @(currentAttendance.Value < Model.MaxCapacity ? "green" : "red"); font-weight: bold;"> @currentAttendance.Value</span></p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                }
+
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="CoursesToBeRegistered" asp-for="CoursesToBeRegistered" placeholder="..">
+                            <input asp-for="ClassName" placeholder=".."  value="@Model.ClassName" class="hidden">
+                            <input asp-for="ClassMasterID" value="@Model.ClassMasterID" class="hidden">
+                        </form>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="gonder" style="background-color:aliceblue;font-weight:bold;">Gönder</button>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@section AdditionalScripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('#gonder').on('click', function () {
+                var checkedItems = [];
+
+                $('.beRegisteredCourse_:checked').each(function () {
+                    var date = $(this).data('date');
+                    checkedItems.push(date);
+                });
+
+                
+                var schedulesString = checkedItems.join(',');
+
+                $('#CoursesToBeRegistered').val(schedulesString);
+                
+                 var registration = $('form').serialize();
+                 $.post('/Panel/InsertKursKatimciKayit', registration, function (response) {
+                     if (response.success) {
+                         alert(response.message);
+                         location.reload();
+                     } else {
+                         alert(response.message);
+                     }
+                 });
+            });
+        });
+    </script>
+
+}

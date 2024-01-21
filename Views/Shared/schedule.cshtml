@@ -1,0 +1,225 @@
+﻿@model Pan.Models.HomeViewModels.ScheduleViewModel
+
+@using Microsoft.EntityFrameworkCore;
+@using Pan.Models;  
+@using Pan.Models.DbClasses;
+
+<div class="page-section" id="scheduleContainer">
+
+    <div class="container wide2">
+
+        <div class="content-element2">
+
+            <div class="section-pre-title">BİZE Katılın!</div>
+            <h2 class="section-title">Devam Eden Eğitimler</h2>
+
+            <div class="healcode" id="takvim">
+
+                <div class="healcode-header" style="padding-bottom:15px;">
+
+                    <a href="#" class="action_icon print_version"><i class="licon-printer"></i></a>
+                    <a href="#" class="action_icon cart_version"><i class="licon-cart"></i></a>
+                    <a href="#" class="action_icon my_account_version"><i class="licon-user-lock"></i></a>
+
+                    <h5 class="healcode-title-text">@Model.SelectedDayForCalendar Haftası Takvim</h5>
+
+                    <div class="filters">
+
+                        <div class="filters-select">
+                            <div class="row">
+                                <div class="col-sm-3">
+
+                                    <div class="mad-custom-select">
+                                        <select class="filterDropdown" id="ClassTypeDropDown" data-default-text="Tüm Ders Tipleri">
+                                            @{
+                                                List<string> distinctClassTypes = new();
+                                                foreach (ClassTypes item in Model.ClassTypes)
+                                                {
+                                                    if (!distinctClassTypes.Contains(item.ClassName))
+                                                    {
+                                                        distinctClassTypes.Add(item.ClassName);
+                                                        <option value="">@item.ClassName</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <div class="mad-custom-select">
+                                        <select class="filterDropdown" id="CityDropDown" data-default-text="Tüm Şehirler">
+                                            @{
+                                                List<string> distinctCities = new();
+
+                                                foreach (Locations item in Model.Locations)
+                                                {
+                                                    if (!distinctCities.Contains(item.City))
+                                                    {
+                                                        distinctCities.Add(item.City);
+                                                        <option value="">@item.City</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <div class="mad-custom-select">
+                                        <select class="filterDropdown" id="StudioDropDown" data-default-text="Tüm Stüdyolar">
+                                            @{
+
+                                                List<string> distinctStudios = new();
+
+                                                foreach (Locations item in Model.Locations)
+                                                {
+                                                    if (!distinctStudios.Contains(item.LocationName))
+                                                    {
+                                                        distinctStudios.Add(item.LocationName);
+                                                        <option value="">@item.LocationName</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <div class="mad-custom-select">
+                                        <select class="filterDropdown" id="TeacherDropDown" data-default-text="Tüm Eğitmenler">
+                                            @{
+                                                List<string> distinctInstructors = new();
+                                                foreach (Instructors item in Model.Instructors)
+                                                {
+                                                    if (!distinctInstructors.Contains(item.FirstName + " " + item.LastName))
+                                                    {
+                                                        distinctInstructors.Add(item.FirstName + " " + item.LastName);
+                                                        <option value="">@item.FirstName @item.LastName</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter_days">
+
+                        <div class="input-wrapper">
+                            <input class="checkboxDayFilters" type="checkbox" id="Monday" >
+                            <label for="Monday">Pzts</label>
+
+                            <input class="checkboxDayFilters" type="checkbox" id="Tuesday" >
+                            <label for="Tuesday">Salı</label>
+
+                            <input class="checkboxDayFilters" type="checkbox" id="Wednesday" >
+                            <label for="Wednesday">Çrş</label>
+
+                            <input class="checkboxDayFilters" type="checkbox" id="Thursday" >
+                            <label for="Thursday">Per</label>
+
+                            <input class="checkboxDayFilters" type="checkbox" id="Friday" >
+                            <label for="Friday">Cum</label>
+
+                            <input class="checkboxDayFilters" type="checkbox" id="Saturday" >
+                            <label for="Saturday">Cmts</label>
+
+                            <input class="checkboxDayFilters" type="checkbox" id="Sunday" >
+                            <label for="Sunday">Pzr</label>
+                        </div>
+
+                    </div>
+
+                    <div class="filter_time_of_day">
+
+                        <div class="input-wrapper">
+                            <input class="checkboxDayTimeFilters" type="checkbox" id="Morning" >
+                            <label for="Morning">Sabah</label>
+
+                            <input class="checkboxDayTimeFilters" type="checkbox" id="Noon">
+                            <label for="Noon">Öğle</label>
+
+                            <input class="checkboxDayTimeFilters" type="checkbox" id="Evening">
+                            <label for="Evening">Akşam</label>
+                            <a id="filterTimeButton" class="btn btn-small">Fİltrele</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="date_links">
+                    <div class="week_links">
+
+                        <span class="healcode-previous previous_week">
+                            <a href="#takvim" id="previousWeekButton">ÖNCEKİ Hafta</a>
+                        </span>
+                        <span class="healcode-today today">
+
+                            <a id="weekNumber" href="#takvim" asp-for="@Model.WeekNumberOfSelectedDay">Hafta @Model.WeekNumberOfSelectedDay</a>
+                        </span>
+                        <span class="healcode-next next_week">
+
+                            <a href="#takvim" id="nextWeekButton">SONRAKİ HAFTA</a>
+
+                        </span>
+
+                        <span class="healcode-jump-to-date">
+
+                            <i class="licon-calendar-empty"></i>
+                            <input id="selectedDate" type="text" onblur="validateAndUpdateDate(this)"
+                                   value="@Model.SelectedDayForCalendar">
+
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+            <div class="table-type-1 schedule responsive-table">
+                <table>
+                    <tr>
+                        <th>Saat</th>
+                        <th>EĞİTİM</th>
+                        <th>EĞİTMEN</th>
+                        <th>Stüdyo</th>
+                    </tr>
+                    @foreach(var item in Model.classes)
+                    {
+                        <tr>
+                            <td data-title="@item.Schedule">
+                                <div class="flex-row justify-content-between">
+
+                                    <div>@item.Schedule.ToString("HH:mm") - @item.Schedule.AddMinutes(Convert.ToDouble(item.DurationMinutes)).ToString("HH:mm")</div>
+                                    <a href="#" class="btn btn-small">Kaydol</a>
+
+                                </div>
+                            </td>
+                            <td data-title="Class"><a asp-controller="Home" asp-action="Classes" asp-route-id="@item.ClassID.ToString()" class="link-text" target="_blank" rel="noreferrer noopener"> @Model.classesMaster.Where(i=> i.ClassMasterID == @item.ClassMasterID).Select(n=>n.ClassName).FirstOrDefault()</a></td>
+                            <td data-title="Instructor">
+                                <a asp-controller="Home" asp-action="InstructorPage" asp-route-id="@item.InstructorID.ToString()" target="_blank" rel="noreferrer noopener" class="link-text">
+                                    @Model.Instructors.Where(i=>i.InstructorID == item.InstructorID).Select(f =>f.FirstName).FirstOrDefault()
+                                </a>
+                            </td>
+                            <td data-title="Place"><a asp-controller="Home" asp-action="StudioPage" asp-route-id="@item.LocationID.ToString()" target="_blank" rel="noreferrer noopener" class="link-text">@Model.Locations.Where(i=>i.LocationID == item.LocationID).Select(l=> l.LocationName).FirstOrDefault()</a></td>
+                        </tr>
+                    }
+                   
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

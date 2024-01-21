@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewData["Title"] = "InsertTeacherPictures";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+@model Pan.Models.DbClasses.ViewModels.InsertTeacherPicturesAndLinksViewModel
+
+@section AdditionalCss{
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Eğitmen Foto-Link Yükle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="InsertTeacherForClasses">Eğitmen Resmi Yükle</a></li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <!-- - - - - - - - - - - - - -Pick Teacher - - - - - - - - - - - - - - - - -->
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Güncellenecek Eğitmen Seçiniz</h3>
+                    </div>
+                        <div class="card-body">
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Eğitmen İsmi</label>
+                                            <select class="form-control rounded-0" id="pickTeacher" style="max-width:500px;">
+                                                <option value="" selected disabled>---Seçim Yapınız---</option>
+                                                @foreach (var item in Model.InstructorInfo)
+                                                {
+                                                    <option>@item.Value</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group hidden">
+                                            <label style="padding:10px;">Eğitmen İsmi</label>
+                                            <select class="form-control rounded-0" id="pickTeacherID" style="max-width:500px;">
+                                                <option value="" selected disabled>---Seçim Yapınız---</option>
+                                                @foreach (var item in Model.InstructorInfo)
+                                                {
+                                                <option class="pickTeacherIDOptions" data-id="@item.Key">@item.Key</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                         </div>
+                </div>
+
+                <!-- - - - - - - - - - - - - -Pick Photo Type - - - - - - - - - - - - - - - - -->
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Eğitmen Resmi Yükle</h3>
+                    </div>
+
+
+                    <form enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Fotoğraf Tipi</label>
+                                            <select class="form-control rounded-0" id="pickPhotoStyle" style="max-width:500px;">
+                                                <option value="" selected disabled>---Seçim Yapınız---</option>
+                                                @foreach (var item in Model.PhotoNames)
+                                                {
+                                                    <option>@item.Key</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Fotoğraf Boyut</label>
+                                                @foreach (var item in Model.PhotoNames)
+                                                {
+                                                    <input type="text" class="hidden photoDimensionInput" disabled value="@item.Value Pixel">
+                                                }
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="col-12" style="height:50px;">
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="file" class="btn" id="pickPhotoPath" style="background-color:rebeccapurple; font-weight:bold; color:wheat">
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+
+                                </div>
+                            </div>
+                         </div>
+                         <div class="card-footer">
+                                <button type="submit" class="btn" id="sendPhoto" style="background-color:aliceblue;font-weight:bold;">Foto Gönder</button>
+                         </div>
+                    </form>
+                </div>
+
+                <!-- - - - - - - - - - - - - -Social Links - - - - - - - - - - - - - - - - -->
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Sosyal Medya Linki Yükle</h3>
+                    </div>
+                        <form>
+                        <div class="card-body">
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Linkler</label>
+                                            <select class="form-control rounded-0" id="pickLinkType" style="max-width:500px;">
+                                                @foreach (var item in Model.Links)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Adres</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" id="linkAddress">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="sendLink" style="background-color:aliceblue;font-weight:bold;">Link Gönder</button>
+                        </div>
+                        
+                    </form>                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@Html.Partial("confirmationAndErrorModals")
+
+@section AdditionalScripts
+    {
+    <script>
+        $(document).ready(function () {
+           
+           
+            var selectedIndex = 0;
+            $('#pickPhotoStyle').on('change', function () {
+                selectedIndex = $(this).prop('selectedIndex');
+               
+                $('.photoDimensionInput').addClass('hidden')
+                $('.photoDimensionInput').eq(selectedIndex - 1).removeClass('hidden')
+            });
+
+            // fotoğraf gönder
+            $('#sendPhoto').on('click', function (event) {
+
+                event.preventDefault();
+
+                var teacherName = $('#pickTeacher').val();
+
+                var selectedIndex = $('#pickTeacher').prop('selectedIndex');
+                var teacherID = $('.pickTeacherIDOptions').eq(selectedIndex - 1).data('id');
+                
+                if (teacherName === null) {
+                    alert('Eğitmen Seçiniz!');
+                    return;
+                }
+
+                var photoName = $('#pickPhotoStyle').val();
+                if (photoName === null) {
+                    alert('Fotoğraf Tipi Seçiniz!');
+                    return;
+                 }
+                var fileInput = $('#pickPhotoPath')[0].files[0];
+
+                var formData = new FormData();
+                formData.append('teacherName', teacherName);
+                formData.append('teacherID', teacherID);
+                formData.append('photoName', photoName);
+                formData.append('file', fileInput);
+
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Panel/InsertTeacherPicturesandLinks/UpdatePhotos?_=" + new Date().getTime(),
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.success) {
+
+                            alert(data.message);
+                        } else {
+
+                            alert('Hata: ' + data.message);
+                        }
+                    },
+                    error: function () {
+
+                        alert('Fotoğraf Yüklenirken Hata İle Karşılaşıldı...');
+                    }
+                });
+            });
+
+            //link gönder
+            $('#sendLink').on('click', function (event) {
+
+                event.preventDefault();
+                var teacherName = $('#pickTeacher').val();
+
+                var selectedIndex = $('#pickTeacher').prop('selectedIndex');
+                var teacherID = $('.pickTeacherIDOptions').eq(selectedIndex - 1).data('id');
+                
+                if (teacherName === null) {
+                    alert('Eğitmen Seçiniz!');
+                    return;
+                }
+
+                var linkType = $('#pickLinkType').val();
+                if (linkType === null) {
+                    alert('Link Tipi Seçiniz!');
+                    return;
+                }
+
+                var linkAddress = $('#linkAddress').val();
+                if (linkAddress === null) {
+                    alert('Adres boş olamaz!');
+                    return;
+                }
+
+                var formData = new FormData();
+                formData.append('teacherName', teacherName);
+                formData.append('teacherID', teacherID);
+                formData.append('linkType', linkType);
+                formData.append('linkAddress', linkAddress);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Panel/InsertTeacherPicturesandLinks/UpdateLinks?_=" + + new Date().getTime(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                        } else {
+                            alert('Hata: ' + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Link Yüklenirken Hata İle Karşılaşıldı...');
+                    }
+                });
+            });
+
+        });
+    </script>
+}
+
+
+

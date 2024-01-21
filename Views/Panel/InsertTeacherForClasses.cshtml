@@ -1,0 +1,551 @@
+﻿
+@{
+    ViewData["Title"] = "Eğitmen Kayıt";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+
+@model Pan.Models.DbClasses.ViewModels.InsertTeacherViewModel
+
+@section AdditionalCss{
+
+    <style>
+        #gonder:hover {
+            background-color: lavender;
+        }
+
+        .checkBoxDiv {
+            display: inline-block; /* Ensure the container only takes the space it needs */
+            
+        }
+
+        .checkboxForInstructorInfo {
+            zoom: 1.6; /* Adjust the zoom factor as needed */
+        }
+    </style>
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Eğitmen Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="InsertTeacherForClasses">Eğitmen Kayıt</a></li>
+        
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Yeni Eğitmen</h3>
+                    </div>
+
+
+                    <form>
+                        <div class="card-body">
+                            <!-- - - - - - - - - - - - - - Name - - - - - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">İsim</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.FirstName" id="firstName" placeholder="Eğitmen İsmi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">İkinci İsim</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.SecondName" id="secondName"  placeholder="Varsa İkinci İsmi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Soyisim</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.LastName" id="lastName" placeholder="Eğitmen Soyismini Giriniz...">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- - - - - - - - ----  Email Phone Title- - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Email</label>
+                                            <input type="email" class="form-control form-control-border border-width-2" id="email" asp-for="@Model.TeacherToRecord.Email" placeholder="Mail Adresi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Tel</label>
+                                            <input type="tel" class="form-control form-control-border border-width-2" id="phone" asp-for="@Model.TeacherToRecord.Phone" placeholder="Telefon Numarası Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Ünvan</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" id="title" asp-for="@Model.TeacherToRecord.Title" placeholder="Ünvan Giriniz...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - ---- - Studio Parent Teacher- - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Çalışılan Stüdyolar</label>
+                                            <select class="form-control rounded-0" id="studiosWorkFor" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.LocationsToWork)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Bağlı Olunan Eğitmenler</label>
+                                            <select class="form-control rounded-0" id="parentTeacherNames" multiple style="max-width:500px;" >
+                                                @foreach (var item in Model.ExistingTeachers)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <div class="col-12">
+                                                <label  style="padding:10px;">Alt Eğitmen?</label>
+                                            </div>
+                                            <div class="col-12 checkBoxDiv">
+                                                <input type="checkbox"  id="isParent" asp-for="@Model.TeacherToRecord.IsParent" class="checkboxForInstructorInfo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - ---- - Studio Owner- - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <div class="col-12">
+                                                <label style="padding:10px;">Stüdyo Sahibi?</label>
+                                            </div>
+                                            <div class="col-12 checkBoxDiv">
+                                                <input type="checkbox" id="isStudioOwner" asp-for="@Model.TeacherToRecord.IsStudioOwner" class="checkboxForInstructorInfo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Sahip Olunan Stüdyolar</label>
+                                            <select class="form-control rounded-0" id="studiosOwned" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.LocationsToWork)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - ---- ---- - Bio Slogan - - - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Bio</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="bio" asp-for="@Model.TeacherToRecord.Bio" placeholder="Biografi Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Slogan</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="slogan" asp-for="@Model.TeacherToRecord.Slogan" placeholder="Ana Slogan Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Slogan Alt Metin</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="sloganSub" asp-for="@Model.TeacherToRecord.SloganSub" placeholder="Alt Slogan Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - ---- ---- - Pylosophy & Education Style -  - - - - - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Yaşam Felsefesi</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="lifePhyl" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStyleMainSentence" placeholder="Hayata Bakış Açınızı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Eğitim Felsefesi</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="eduPhyl" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStylePhilosophy" placeholder="Eğitimleri İcra Ediş Tarzınızı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Eğitim Stili</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="eduStylo" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStyleEducationStyle" placeholder="Eğitimlerde Öğrencilere Yaklaşım Tarzınızı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label  style="padding:10px;">Eğitim Odağı</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" id="eduFocus" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStyleFocus" placeholder="Eğitimlerde Odaklandığınız Hususları Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - ---- ---- - Kurslar - - ---- - - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Öne Çıkarılacak Kurs</label>
+                                            <select class="form-control rounded-0" id="featuredCourse" asp-for="@Model.TeacherToRecord.FeaturedCourse" style="max-width:500px;">
+                                                @foreach (var item in Model.ClassesToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Verilen Kurslar</label>
+                                            <select class="form-control rounded-0" name="coursesToSelect[]" id="coursesToSelect" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.ClassesToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - ---- ---- - Etkinlik Challenge - - ---- - -- - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                           
+                                                <label style="padding:10px;">Sunulan Etkinlikler</label>
+                                            <select class="form-control rounded-0"  id="eventsToSelect" multiple style="max-width:500px;">
+                                                    @foreach (var item in Model.EventsToOffer)
+                                                    {
+                                                        <option>@item</option>
+                                                    }
+                                                </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Sunulan Meydan Okumalar</label>
+                                            <select class="form-control rounded-0"  id="challengesToSelect" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.ChallengesToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="send" style="background-color:aliceblue;font-weight:bold;">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Uyarı</h5>
+                <button type="button" class="close confirmation-modal-no-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-modal-warning-paragraph"></p>
+                <p>Devam Etmek İstiyor Musunuz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary confirmation-modal-no-button" data-dismiss="modal">Hayır</button>
+                <button type="button" class="btn btn-primary confirmation-modal-yes-button">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="error-modal-label">Hata</h5>
+                <button type="button" class="close error-modal-ok-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body error-modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger error-modal-ok-button" data-dismiss="modal">Tamam</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section AdditionalScripts
+    {
+    <script>
+        $(document).ready(function () {
+
+            $(document).on("click", "#send", function () {
+        
+                var errorParagraph = '';
+                //name-email sections validation
+                if ($('#firstName').val() === '')
+                    errorParagraph = errorParagraph + '<p>İsim Boş Olamaz</p><br>';
+
+                if ($('#lastName').val() === '')
+                    errorParagraph = errorParagraph + '<p>Soyisim Boş Olamaz</p><br>';
+                if ($('#email').val() === '')
+                    errorParagraph = errorParagraph + '<p>Email Boş Olamaz</p><br>';
+                if ($('#phone').val() === '')
+                    errorParagraph = errorParagraph + '<p>Telefon Boş Olamaz</p><br>';
+                if($('#title').val()==='')
+                    errorParagraph = errorParagraph + '<p>Ünvan Boş Olamaz</p><br>'
+
+                //studio parent teacher
+                var selectedStudios = $('#studiosWorkFor').val();
+
+                    if ($('#studiosWorkFor').val() === '')
+                        errorParagraph = errorParagraph + '<p>Stüdyo Seçiniz!</p><br>'
+
+                var resultStudios = selectedStudios ? selectedStudios.join(', ') : '';
+                console.log('Selected Studios: ' + resultStudios);
+
+                var selectedParentTeachers = $('#parentTeacherNames').val();
+                    var resultParentTeachers = selectedParentTeachers ? selectedParentTeachers.join(', ') : '';
+                    console.log('Selected Teachers: ' + resultParentTeachers);
+
+                var selectedStudiosOwned = $('#studiosOwned').val();
+                    var resultStudiosOwneds = selectedStudiosOwned ? selectedStudiosOwned.join(', ') : '';
+                    console.log('Selected Owned Studios: ' + selectedStudiosOwned); 
+
+                 //bio slogan
+                 if ($('#bio').val() === '')
+                     errorParagraph = errorParagraph + '<p>Biografi Boş Olamaz</p><br>'
+                 if ($('#slogan').val() === '')
+                     errorParagraph = errorParagraph + '<p>Slogan Boş Olamaz</p><br>'
+                 if ($('#sloganSub').val() === '')
+                     errorParagraph = errorParagraph + '<p>Alt Slogan Boş Olamaz</p><br>'
+
+                    //phylo edu
+                    if ($('#lifePhyl').val() === '')
+                        errorParagraph = errorParagraph + '<p>Hayat Felsefesi Boş Olamaz</p><br>'
+                    if ($('#eduPhyl').val() === '')
+                        errorParagraph = errorParagraph + '<p>Eğitim Felsefesi Boş Olamaz</p><br>'
+                    if ($('#eduStylo').val() === '')
+                        errorParagraph = errorParagraph + '<p>Eğitim Stili Boş Olamaz</p><br>'
+                    if ($('#eduFocus').val() === '')
+                        errorParagraph = errorParagraph + '<p>Eğitim Odaklanması Boş Olamaz</p><br>'
+
+                    //courses
+                    if ($('#featuredCourse').val() === '')
+                        errorParagraph = errorParagraph + '<p>Öne Çıkarılacak Kurs Boş Olamaz</p><br>'
+                    if ($('#coursesToSelect').val() === '')
+                        errorParagraph = errorParagraph + '<p>Verilen Kurs Boş Olamaz</p><br>'
+                    else {
+                        var selectedCourses = $('#coursesToSelect').val();
+                        if (selectedCourses.length > 5) 
+                            errorParagraph = errorParagraph + '<p>Verilen Kurs 5 ten fazla girilemez..(Web Sitesinde Sergilenmek Maksatlı)</p><br>'
+                        var coursesToGive = selectedCourses ? selectedCourses.join(', ') : '';
+                        console.log('Selected Courses: ' + coursesToGive);
+                    }
+
+
+                    //events and challenges
+                    if ($('#eventsToSelect').val() === '')
+                        errorParagraph = errorParagraph + '<p>Etkinlik Boş Olamaz</p><br>'
+                    else {
+                        var selectedEvents = $('#eventsToSelect').val();
+
+                        if (selectedEvents.length > 5)
+                            errorParagraph = errorParagraph + '<p>Verilen Etkinlik 5 ten fazla girilemez..(Web Sitesinde Sergilenmek Maksatlı)</p><br>'
+
+                        var eventsToGive = selectedEvents ? selectedEvents.join(', ') : '';
+                        console.log('Selected Events: ' + eventsToGive);
+                    }
+                    if ($('#challengesToSelect').val() === '')
+                        errorParagraph = errorParagraph + '<p>Meydan Okuma Boş Olamaz</p><br>'
+                    else {
+                        var selectedChallenges = $('#challengesToSelect').val();
+                            if(selectedChallenges.length > 5)
+                                errorParagraph = errorParagraph + '<p>Verilen Meydan Okuma 5 ten fazla girilemez..(Web Sitesinde Sergilenmek Maksatlı)</p><br>'
+
+                        var challengesToGive = selectedChallenges ? selectedChallenges.join(', ') : '';
+                        console.log('Selected Challenges: ' + challengesToGive);
+                    }
+            
+                    if (errorParagraph !== '') {
+                        console.log (errorParagraph)
+                        alert(errorParagraph);
+                        return;
+                    }
+                var formData = {
+                    TeacherToRecord: {
+                        FirstName: $('#firstName').val(),
+                        SecondName: $('#secondName').val(),
+                        LastName: $('#lastName').val(),
+                        Email: $('#email').val(),
+                        Phone: $('#phone').val(),
+                        Title: $('#title').val(),
+                        Bio: $('#bio').val(),
+                        Slogan: $('#slogan').val(),
+                        SloganSub: $('#sloganSub').val(),
+                        PhilosophyAndEducationStyleMainSentence: $('#lifePhyl').val(),
+                        PhilosophyAndEducationStylePhilosophy: $('#eduPhyl').val(),
+                        PhilosophyAndEducationStyleEducationStyle: $('#eduStylo').val(),
+                        PhilosophyAndEducationStyleFocus: $('#eduFocus').val(),
+                        FeauturedCourse: $('#featuredCourse').val(),
+                        IsStudioOwner: $('#isStudioOwner').val(),
+                        IsParent: $('#isParent').val(),
+                    },
+
+                    // Multi-select values
+                    StudiosWorkFor: $('#studiosWorkFor').val() ? $('#studiosWorkFor').val().join(',') : '',
+                    ParentTeacherName: $('#parentTeacherNames').val() ? $('#parentTeacherNames').val().join(',') : '',
+                    StudiosOwned: $('#studiosOwned').val() ? $('#studiosOwned').val().join(',') : '',
+                    ClassesGiven: $('#coursesToSelect').val() ? $('#coursesToSelect').val().join(',') : '',
+                    EventsGiven: $('#eventsToSelect').val() ? $('#eventsToSelect').val().join(',') : '',
+                    ChallengeGiven: $('#challengesToSelect').val() ? $('#challengesToSelect').val().join(',') : '',
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Panel/InsertTeacherForClasses?_=" + new Date().getTime(),
+                    data: formData,
+                    cache: false,
+                    success: function (data) {
+                        if (data.success) {
+                        
+                            alert('Success: ' + data.message);
+                        } else {
+                            
+                            alert('Error: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                   
+                        alert('Eğitmen Yüklenirken Hata İle Karşılaşıldı...');
+                    }
+                });
+
+                    // $('#confirmation-modal-warning-paragraph').html('Öğretmen Kaydedilecek. <br>');
+                    // $('#confirmation-modal').modal('show');
+
+                    // $('.confirmation-modal-no-button').click(function () {
+                    //     $('#confirmation-modal').modal('hide');
+                    //     return;
+                    // });
+
+                    // $('.confirmation-modal-yes-button').click(function () {
+
+                    //     var formData = {
+                    //         TeacherToRecord: {
+                    //             FirstName: $('#firstName').val(),
+                    //             SecondName: $('#secondName').val(),
+                    //             LastName: $('#lastName').val(),
+                    //             Email: $('#email').val(),
+                    //             Phone: $('#phone').val(),
+                    //             Title: $('#title').val(),
+                    //             Bio: $('#bio').val(),
+                    //             Slogan: $('#slogan').val(),
+                    //             SloganSub: $('#sloganSub').val(),
+                    //             PhilosophyAndEducationStyleMainSentence: $('#lifePhyl').val(),
+                    //             PhilosophyAndEducationStylePhilosophy: $('#eduPhyl').val(),
+                    //             PhilosophyAndEducationStyleEducationStyle: $('#eduStylo').val(),
+                    //             PhilosophyAndEducationStyleFocus: $('#eduFocus').val(),
+                    //             FeauturedCourse: $('#featuredCourse').val(),
+                    //             IsStudioOwner: $('#isStudioOwner').val(),
+                    //         },
+                      
+                    //         // Multi-select values
+                    //         StudiosWorkFor: $('#studiosWorkFor').val() ? $('#studiosWorkFor').val().join(',') : '',
+                    //         ParentTeacherName: $('#parentTeacherNames').val() ? $('#parentTeacherNames').val().join(',') : '',
+                    //         StudiosOwned: $('#studiosOwned').val() ? $('#studiosOwned').val().join(',') : '',
+                    //         ClassesGiven: $('#coursesToSelect').val() ? $('#coursesToSelect').val().join(',') : '',
+                    //         EventsGiven: $('#eventsToSelect').val() ? $('#eventsToSelect').val().join(',') : '',
+                    //         ChallengeGiven: $('#challengesToSelect').val() ? $('#challengesToSelect').val().join(',') : '',
+                    //     };
+
+                    //     $.ajax({
+                    //         type: "POST",
+                    //         url: "/Panel/InsertTeacherForClasses?_=" + new Date().getTime(),
+                    //         data: formData,
+                    //         cache: false,
+                    //         success: function (data) {
+                    //             if (data.success) {
+                    //                 $('#confirmation-modal').modal('hide');
+                    //                 alert('Success: ' + data.message);
+                    //             } else {
+                    //                 $('#confirmation-modal').modal('hide');
+                    //                 alert('Error: ' + data.message);
+                    //             }
+                    //         },
+                    //         error: function () {
+                    //             $('#confirmation-modal').modal('hide');
+                    //             alert('Takvim Yüklenirken Hata İle Karşılaşıldı...');
+                    //         }
+                    //     });
+                    //});
+
+            });
+        });
+    </script>
+          
+}
+

@@ -1,0 +1,417 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Google Web Fonts
+    ================================================== -->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CPrata" rel="stylesheet">
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    @RenderSection("Title", required: true)
+
+    <!--meta info-->
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    @RenderSection("KeywordsandDescription", required: true)
+    
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Vendor CSS
+    ============================================ -->
+
+    <link rel="stylesheet" href="~/font/demo-files/demo.css">
+    <link rel="stylesheet" href="~/plugins/fancybox/jquery.fancybox.css">
+
+    <!-- CSS theme files
+    ============================================ -->
+    <link rel="stylesheet" href="~/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="~/css/fontello.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    @RenderSection("AdditionalCss", required: false)
+
+</head>
+
+<body>
+    <div class="loader"></div> 
+
+    <!--cookie-->
+    <!-- <div class="cookie">
+            <div class="container">
+              <div class="clearfix">
+                <span>Please note this website requires cookies in order to function correctly, they do not store any specific information about you personally.</span>
+                <div class="f-right"><a href="#" class="button button-type-3 button-orange">Accept Cookies</a><a href="#" class="button button-type-3 button-grey-light">Read More</a></div>
+              </div>
+            </div>
+          </div>-->
+    <!-- - - - - - - - - - - - - - Wrapper - - - - - - - - - - - - - - - - -->
+
+    <div id="wrapper" class="wrapper-container">
+
+        <!-- - - - - - - - - - - - - Mobile Menu - - - - - - - - - - - - - - -->
+
+        <nav id="mobile-advanced" class="mobile-advanced"></nav>
+
+        <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
+
+        <header id="header" class="header sticky-header">
+
+            <!-- searchform -->
+
+            <div class="searchform-wrap">
+                <div class="vc-child h-inherit">
+
+                    <form class="search-form">
+                        <button type="submit" class="search-button"></button>
+                        <div class="wrapper">
+                            <input type="text" name="search" placeholder="Start typing...">
+                        </div>
+                    </form>
+
+                    <button class="close-search-form"></button>
+
+                </div>
+            </div>
+
+            <!-- top-header -->
+
+            <div class="top-header">
+
+                <div class="container">
+
+                    <div class="flex-row align-items-center justify-content-between">
+
+                        <!-- logo -->
+
+                        <div class="logo-wrap">
+
+                            <a href="index.html" class="logo"><img src="images/logo.png" alt=""></a>
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - / Mobile Menu - - - - - - - - - - - - - -->
+                        <!--main menu-->
+
+                        <div class="menu-holder">
+
+                            <div class="menu-wrap">
+
+                                <div class="nav-item">
+
+                                    <!-- - - - - - - - - - - - - - Navigation - - - - - - - - - - - - - - - - -->
+
+                                    <nav id="main-navigation" class="main-navigation">
+                                        <ul id="menu">
+                                            <li id="home">
+                                                <a asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Kurslar</a>
+                                                <!--sub menu-->
+                                                <div class="sub-menu-wrap">
+                                                    <ul>
+                                                        <li><a asp-controller="Home" asp-action="ClassesAll">Kurslar</a></li>
+                                                        <li><a asp-controller="Home" asp-action="ClassTypes">Kurs Açıklamaları</a></li>
+                                                        <li><a href="classes_schedule.html">Kurs Takvimi</a></li>
+                                                        <li><a href="challenges.html">Meydan Okumalar</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="#">ETKİNLİKLER</a>
+                                                <!--sub menu-->
+                                                <div class="sub-menu-wrap">
+                                                    <ul>
+                                                        <li><a href="events_list.html">Etkinlik Listesi</a></li>
+                                                        <li><a href="events_masonry.html">Etkinlik Galerisi</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a asp-controller="Panel" asp-action="Index">PANEL</a>
+                                                <!--sub menu-->
+                                             
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="#">Mağaza</a>
+                                                <!--sub menu-->
+                                                <div class="sub-menu-wrap">
+                                                    <ul>
+                                                        <li><a href="shop_category.html">Kategori Sayfası</a></li>
+                                                        <li><a href="shop_single.html">Ürün Sayfası</a></li>
+                                                        <li><a href="shop_cart.html">Sepet</a></li>
+                                                        <li><a href="shop_checkout.html">Alışverişi Tamamla</a></li>
+                                                        <li><a href="shop_account.html">Hesabım</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+
+                                    <!-- - - - - - - - - - - - - end Navigation - - - - - - - - - - - - - - - -->
+
+                                </div>
+
+                                <!-- search button -->
+                                <div class="search-holder"><button type="button" placeholder="arayın..." class="search-button"></button></div>
+                                <!-- account button -->
+                                <button type="button" class="account popup-btn-login"></button>
+                                <!-- shop button -->
+                                <div class="shop-cart">
+
+                                    <button class="sc-cart-btn dropdown-invoker"><span class="licon-cart"></span></button>
+
+                                    <div class="shopping-cart dropdown-window">
+
+                                        <div class="products-holder">
+
+                                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+
+                                            <div class="product">
+
+                                                <button class="item-close"></button>
+
+                                                <a href="#" class="product-image">
+
+                                                    <img src="images/78x78_img1.jpg" alt="">
+
+                                                </a>
+
+                                                <div class="product-description">
+
+                                                    <h6 class="product-title"><a href="#">Non Slip Yoga Mat</a></h6>
+
+                                                    <span class="product-price">1x$19.95</span>
+
+                                                </div><!--/ .product-info -->
+
+                                            </div>
+
+                                            <!-- - - - - - - - - - - - - - End of Product - - - - - - - - - - - - - - - - -->
+                                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+
+                                            <div class="product">
+
+                                                <button class="item-close"></button>
+
+                                                <a href="#" class="product-image">
+
+                                                    <img src="images/78x78_img2.jpg" alt="">
+
+                                                </a>
+
+                                                <div class="product-description">
+
+                                                    <h6 class="product-title"><a href="#">Light Hard Foam Yoga Blocks</a></h6>
+
+                                                    <span class="product-price">1x$11.35</span>
+
+                                                </div><!--/ .product-info -->
+
+                                            </div>
+
+                                            <!-- - - - - - - - - - - - - - End of Product - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/ .products-holder -->
+
+                                        <div class="sc-footer">
+
+                                            <div class="subtotal">Subtotal: <span class="total-price">$35.68</span></div>
+
+                                            <div class="vr-btns-set">
+
+                                                <a href="#" class="btn btn-small">View Cart</a>
+                                                <a href="#" class="btn btn-small btn-style-3">Checkout</a>
+
+                                            </div><!--/ .vr-btns-set -->
+
+                                        </div>
+
+                                    </div><!--/ .shopping-cart -->
+
+                                </div>
+                                <a href="#" class="btn btn-big btn-style-3">ŞİMDİ Katıl</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- - - - - - - - - - - - - end Header - - - - - - - - - - - - - - - -->
+
+ 
+            @RenderBody()
+ 
+        <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
+
+        <footer id="footer" class="footer" data-bg="images/1920x390_bg1.jpg">
+
+            <div class="logo"><img src="images/logo.png" alt=""></div>
+
+            <div class="container wide-style">
+
+                <!-- main footer -->
+                <div class="main-footer">
+
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-12">
+
+                            <div class="widget">
+
+                                <h6 class="widget-title">Bİzden Haberdar Olun!</h6>
+
+                                <form id="newsletter" class="newsletter style-2">
+                                    <input type="email" name="newsletter-email" placeholder="Email Adresinizi Giriniz...">
+                                    <button type="submit" data-type="submit" class="btn btn-big btn-style-3">Kaydol</button>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4 col-md-12">
+
+                            <div class="widget">
+
+                                <h6 class="widget-title">IletiSimde Kalın...</h6>
+
+                                <ul class="social-icons">
+
+                                    <li><a href="#"><i class="icon-instagram-5"></i></a></li>
+                                    <li><a href="#"><i class="icon-youtube-play"></i></a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <ul class="menu-list">
+
+                    <li><a href="#">Ana Sayfa</a></li>
+                    <li><a href="#">EĞİTİMLERİMİZ</a></li>
+                    <li><a href="#">ETKİNLİKLERİMİZ</a></li>
+                    <li><a href="#">Mağazamız</a></li>
+                    <li><a href="#">EĞİTMENLERİMİZ</a></li>
+                    <li><a href="#">Mekanlarımız</a></li>
+                    <li><a href="#">Blog</a></li>
+
+                </ul>
+
+                <div class="copyright">
+
+                    <p>Copyright © @DateTime.Now.ToString("yyyy") Pan Yoga. Tüm Hakları Saklıdır.</p>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+        <!-- - - - - - - - - - - - - end Footer - - - - - - - - - - - - - - - -->
+
+        <div id="popup-sign" class="popup var3">
+
+            <div class="popup-inner">
+
+                <button type="button" class="close-popup"></button>
+
+                <h4 class="title">Ücretsiz Kaydolun!</h4>
+                <p>Hesabınız Var Mı? <a href="#" class="link-text var2 popup-btn-login">GİRİŞ Yapın</a></p>
+                <a href="#" class="btn fb-btn btn-big"> Facebook İLE GİRİŞ Yap</a>
+                <p class="content-element2">Veya</p>
+                <form class="content-element2">
+
+                    <input type="text" placeholder="Email Adresinizi Giriniz">
+                    <input type="text" placeholder="Şifre">
+                    <a href="#" class="btn btn-style-3 btn-big">GİRİŞ Yap</a>
+
+                </form>
+
+                <p class="text-size-small">Kaydolarak <a href="#" class="link-text">Hizmet Şartları </a>Kabul Edilir.</p>
+
+            </div>
+
+        </div>
+
+        <div id="popup-login" class="popup var3">
+
+            <div class="popup-inner">
+
+                <button type="button" class="close-popup"></button>
+
+                <h4 class="title">Giriş Yapın</h4>
+                <p>Henüz Hesabınız Yok Mu?<a href="#" class="link-text var2 popup-btn-sign">ÜCRETSİZ Katılın!</a></p>
+                <a href="#" class="btn fb-btn btn-big"> Facebook İLE GİRİŞ Yap</a>
+                <p class="content-element2">Veya</p>
+                <form class="content-element1">
+
+                    <input type="text" placeholder="Email Adresinizi Giriniz">
+                    <input type="text" placeholder="Şifre">
+                    <a href="#" class="btn btn-style-3 btn-big">GİRİŞ Yap</a>
+
+                    <div class="input-wrapper">
+                        <input type="checkbox" id="checkbox" name="checkbox">
+                        <label for="checkbox">Beni Hatırla</label>
+                    </div>
+
+                </form>
+
+                <p class="text-size-small"><a href="#" class="link-text">Şiremi Unuttum</a></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - -->
+    <!-- JS Libs & Plugins
+    ============================================ -->
+    <script src="~/js/libs/jquery.modernizr.js"></script>
+    <script src="~/js/libs/jquery-2.2.4.min.js"></script>
+    <script src="~/js/libs/jquery-ui.min.js"></script>
+    <script src="~/js/libs/retina.min.js"></script>
+   @*  <script src="~/https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBN4XjYeIQbUspEkxCV2dhVPSoScBkIoic"></script>  *@
+    <script src="~/plugins/jquery.scrollTo.min.js"></script>
+    <script src="~/plugins/jquery.localScroll.min.js"></script>
+    @* <script src="~/plugins/instafeed.min.js"></script> *@
+    <script src="~/plugins/fancybox/jquery.fancybox.min.js"></script>
+    <script src="~/plugins/mad.customselect.js"></script>
+    <script src="~/plugins/revolution/js/jquery.themepunch.tools.min.js?ver=5.0"></script>
+    <script src="~/plugins/revolution/js/jquery.themepunch.revolution.min.js?ver=5.0"></script>
+    <script src="~/plugins/jquery.queryloader2.min.js"></script>
+    <script src="~/plugins/owl.carousel.min.js"></script>
+
+    <!-- JS theme files
+    ============================================ -->
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/script.js"></script>
+    
+    <!-- revolution
+    ============================================ -->
+    @RenderSection("Revolution", required: false)
+    @RenderSection("AdditionalJs", required: false)
+
+    
+</body>
+</html>

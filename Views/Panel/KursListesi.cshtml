@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewData["Title"] = "Kurs Listesi";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+@model Pan.Models.DbClasses.ViewModels.ClassListsViewModel
+
+@section AdditionalCss{
+
+    <link rel="stylesheet" href="~/js/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/DataTables/datatables.css" />
+    <link href="~/datatables/buttons-2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+}
+
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                <h1>Kurs Listesi<a class="rounded-add-button" asp-controller="Panel" asp-action="KursGiris"><i class="fas fa-plus" style="color:#fff;font-size:14px;padding:7px;"></i></a></h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                      <li class="breadcrumb-item active">Kurs Listesi</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div style="height: 400px; overflow-y: scroll;">
+                        <div class="card-body">
+                            <table id="dataTable" class="table table-hover compact">
+                                <thead>
+                                    <tr>
+                                        <th>Sınıf Adı</th>
+                                        <th>Eğitim Türü</th>
+                                        <th>Öğretmen</th>
+                                        <th>Tarih</th>
+                                        <th>Süre (Dk.)</th>
+                                        <th>Yer</th>
+                                        <th>Kontenjan</th>
+                                        <th>Fiyat</th>
+                                        <th>İşlem</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Classes)
+                                    {
+                                        <tr data-id="@item.ClassID">
+
+                                            <td>@Model.ClassesMaster.Where(i=>i.ClassMasterID == item.ClassMasterID).Select(n=> n.ClassName).FirstOrDefault()</td>
+                                            <td>
+                                                @if (item.ClassTypeID != null)
+                                                {
+                                                        @Model.ClassTypes.Where(i=>i.ClassTypeID == item.ClassTypeID).Select(n=>n.ClassName).FirstOrDefault()
+                                                   
+                                                }
+                                                else
+                                                {
+                                                    <text>"Ders Tipi Bulunamadı."</text>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.InstructorID != null)
+                                                {
+                                                    @Model.Instructors.Where(i=>i.InstructorID == item.InstructorID).Select(n=> n.FirstName + " " + n.LastName ).FirstOrDefault()
+                                                    
+                                                }
+                                                else
+                                                {
+                                                    <text>"Öğretmen Bulunamadı."</text>
+                                                }
+                                            </td>
+                                            <td>@item.Schedule</td>
+                                            <td>@item.DurationMinutes</td>
+                                            <td>
+                                                @if (item.LocationID != null)
+                                                {
+                                                    @Model.Locations.Where(i=>i.LocationID == item.LocationID).Select(n=> n.LocationName).FirstOrDefault()
+                                                }
+                                                else
+                                                {
+                                                    <text>"Mekan Bulunamadı."</text>
+                                                }
+                                            </td>
+                                            <td>@Model.ClassesMaster.Where(i=>i.ClassMasterID == item.ClassMasterID).Select(m=> m.MaxCapacity).FirstOrDefault()</td>
+                                            <td>@item.Price</td>
+                                            <td>
+                                                <a class="btn-edit"><i class="fas fa-edit"></i></a>
+                                                <a class="btn-delete"><i class="fas fa-trash" style="color:red"></i></a>
+                                            </td>
+                                        
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+@section AdditionalScripts
+{
+   
+    <script src="~/DataTables/datatables.js"></script>
+    
+    <script src="~/datatables/buttons-2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="~/datatables/pdfmake-0.2.7/pdfmake.min.js"></script>
+    <script src="~/datatables/pdfmake-0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(function () {
+
+                var table = $('#dataTable').DataTable({
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json',
+                    },
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+
+                    "columns": [
+                        null, null, null, null, null, null, null, null, null, 
+                    ],
+                    "dom": 'Bfrtip',  // Specify the location of the buttons
+                    "buttons": [
+                        {
+                            extend: 'copy',
+                            exportOptions: {
+                                columns: ':visible:not(:last-child)' // Exclude the last visible column
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            exportOptions: {
+                                columns: ':visible:not(:last-child)' // Exclude the last visible column
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: ':visible:not(:last-child)' // Exclude the last visible column
+                            },
+                            download: 'open'
+                        }
+                    ]
+
+                });
+                $('#dataTable tbody').on('click', '.btn-edit', function () {
+                    var row = $(this).closest('tr');
+                    var id = row.data('id');
+                    var targetUrl = 'KursKatilimListesi/' + id
+                    window.location.href = targetUrl;
+                });
+                $('#dataTable tbody').on('click', '.btn-delete', function () {
+                    var row = $(this).closest('tr');
+                    var id = row.data('id');
+                    var targetUrl = 'KursSil/' + id
+
+                    if (confirm('Kursu Silmek İstediğinizden Emin Misiniz?')) {
+                        $.ajax({
+                            url: 'KursSil/' + id,
+                            type: 'POST',
+                            success: function (data) {
+                                if (data.success) {
+                                    location.reload();
+                                    var urlParams = new URLSearchParams(window.location.search);
+                                    var deleteResult = urlParams.get("deleteResult");
+
+                                    if (deleteResult === "failed paid") {
+                                        alert("Ödeme Mevcut Kurs Silinemedi.");
+                                    }
+
+                                    if (deleteResult === "failed no course") {
+                                        alert("Kurs Bulunamadı.");
+                                    }
+                                    if (deleteResult === "failed database") {
+                                        alert("Veritabanına Bağlanırken Hata İle Karşılaşıldı. Kurs Silinemedi.");
+                                    }
+
+                                    if (deleteResult === "success") {
+                                        alert("Kurs silindi.");
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        
+
+    </script>
+}

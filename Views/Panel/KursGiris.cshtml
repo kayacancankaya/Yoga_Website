@@ -1,0 +1,679 @@
+﻿
+@{
+    ViewData["Title"] = "KursGiris";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+
+@model Pan.Models.DbClasses.ViewModels.KursGirisViewModel
+
+@section AdditionalCss{
+
+    <link rel="stylesheet" href="~/css/dateTimePicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/css/dateTimePicker/tempusdominus-bootstrap-4.min.css">
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Kurs Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="KursListesi">Kurs Listesi</a></li>
+                    <li class="breadcrumb-item active">Kurs Ekle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Yeni Kurs</h3>
+                    </div>
+
+
+                    <form>
+                        <div class="card-body">
+                            <!-- - - - - - - - - - - - - - Kurs Öğretmen - - - - - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="input_kurs_adi" style="padding:10px;">Kurs Adı</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" name="ClassName" id="input_kurs_adi" placeholder="Kurs İsmi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+
+                                        <div class="form-group">
+                                             <label style="padding:10px;">Kurs Tipi</label>
+                                            <select class="form-control rounded-0" name="ClassType" style="width: 100%;">
+                                                @foreach(var classTypes in Model.ClassTypes)
+                                                {
+                                                    <option>@classTypes</option>
+                                                }
+                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Öğretmen</label>
+                                            <select class="form-control rounded-0" name="Instructor" id="instructorSelect" style="width: 100%;">
+                                                @foreach (var teachers in Model.Teachers)
+                                                {
+                                                    <option>@teachers</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - - - - - - - Kurs Başlık,İlgili Kurs, Seviye - - - - - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="input_kurs_adi" style="padding:10px;">Kurs Başlığı</label>
+                                            <textarea type="text" rows="3" class="form-control form-control-border border-width-2" name="ClassTitle" placeholder="Kurs Başlık Yazısı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+
+                                        <div class="form-group">
+                                             <label style="padding:10px;">Benzer Kurslar</label>
+                                            <select class="form-control rounded-0" id="relatedCoursesOptionName" multiple style="width: 100%;">
+                                                @foreach (var classItem in Model.ClassNames)
+                                                {
+                                                    <option>@classItem.Value</option>
+                                                }
+                                             </select>
+                                        </div>
+                                        <div class="form-group hidden">
+                                             <label style="padding:10px;">Benzer Kurslar</label>
+                                            <select class="form-control rounded-0" id="relatedCoursesOptionId" multiple style="width: 100%;">
+                                                @foreach (var classItem in Model.ClassNames)
+                                                {
+                                                    <option>@classItem.Key</option>
+                                                }
+                                             </select>
+                                        </div>
+                                        <div class="form-group hidden">
+                                            <label style="padding:10px;">Benzer Kurslar Listesi</label>
+                                            <input name="RelatedCourses" id="relatedCourses">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="input_kurs_adi" style="padding:10px;">Kurs Açıklaması</label>
+                                            <textarea type="text" rows="3" class="form-control form-control-border border-width-2" name="ClassDescription" placeholder="Kurs Açıklama Yazısı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - - - - - - - Takvim - - - - - - - - - - - - - - - - -->
+                            <div class="container" style="margin-left:0; margin-bottom:10px; background-color:lavender">
+                                <div class="row">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Kurs Takvimi</label>
+                                                    <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control float-right" style="max-width:300px;" name="CoursePeriod"  id="input_kurs_donem">
+                                                    <input type="number" class="form-control" name="DurationMinutes" id="input_sure" style="max-width:100px;margin-left:30px;" placeholder="Süre dk...">
+
+                                                    </div>    
+                                         </div>
+
+                                 </div>
+                                <div class="days-container">
+                                        <div class="day col-3">
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" class="day-checkbox" id="checkbox_Monday">
+                                                <label for="checkbox_Monday">Pazartesi</label>
+                                            </div>
+                                            <div class="bootstrap-timepicker">
+                                                <div class="form-group">
+                                                    <div class="input-group date timepicker_days" id="timepicker_pazartesi" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_pazartesi"/>
+                                                        <div class="input-group-append" data-target="#timepicker_pazartesi" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <div class="day col-3">
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" class="day-checkbox" id="checkbox_Tuesday">
+                                                <label for="checkbox_Tuesday">Salı</label>
+                                            </div>
+                                            <div class="bootstrap-timepicker">
+                                                <div class="form-group">
+                                                    <div class="input-group date timepicker_days" id="timepicker_sali" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_sali" />
+                                                        <div class="input-group-append" data-target="#timepicker_sali" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <div class="day col-3">
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" class="day-checkbox" id="checkbox_Wednesday">
+                                                <label for="checkbox_Wednesday">Çarşamba</label>
+                                            </div>
+                                            <div class="bootstrap-timepicker">
+                                                <div class="form-group">
+                                                    <div class="input-group date timepicker_days" id="timepicker_carsamba" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_carsamba" />
+                                                        <div class="input-group-append" data-target="#timepicker_carsamba" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="days-container">
+                                    <div class="day col-3">
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" id="checkbox_Thursday" class="day-checkbox">
+                                                <label for="checkbox_Thursday">Perşembe</label>
+                                            </div>
+                                            <div class="bootstrap-timepicker">
+                                                <div class="form-group">
+                                                    <div class="input-group date timepicker_days" id="timepicker_persembe" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_persembe" />
+                                                        <div class="input-group-append" data-target="#timepicker_persembe" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                     </div>
+                               
+                               
+                                    <div class="day col-3">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" id="checkbox_Friday" class="day-checkbox">
+                                            <label for="checkbox_Friday">Cuma</label>
+                                        </div>
+                                        <div class="bootstrap-timepicker">
+                                            <div class="form-group">
+                                                <div class="input-group date timepicker_days" id="timepicker_cuma" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_cuma" />
+                                                    <div class="input-group-append" data-target="#timepicker_cuma" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="days-container">
+                                    <div class="day  col-3">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" id="checkbox_Saturday" class="day-checkbox">
+                                            <label for="#checkbox_Saturday">Cumartesi</label>
+                                        </div>
+                                        <div class="bootstrap-timepicker">
+                                            <div class="form-group">
+                                                <div class="input-group date timepicker_days" id="timepicker_cumartesi" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_cumartesi" />
+                                                    <div class="input-group-append" data-target="#timepicker_cumartesi" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="day  col-3">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" id="checkbox_Sunday" class="day-checkbox">
+                                            <label for="#checkbox_Sunday">Pazar</label>
+                                        </div>
+                                        <div class="bootstrap-timepicker">
+                                            <div class="form-group">
+                                                <div class="input-group date timepicker_days" id="timepicker_pazar" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input time-range" data-target="#timepicker_pazar" />
+                                                    <div class="input-group-append" data-target="#timepicker_pazar" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- - - - - - - - - - - - - - Mekan Kapasite Seviye- - - - - - - - - - - - - - - - -->
+                            <div class="container" style="margin-left:0; margin-bottom:10px;background-color:aliceblue">
+                                <div class="row">
+                                    <div class="form-group d-inline-flex ">
+                                        <div class="col-5">
+                                            <label style="padding:10px;">Mekan</label>
+                                                <select class="form-control rounded-0" name="Location" style="max-width:300px;">
+                                                    @foreach (var locations in Model.Locations)
+                                                    {
+                                                        <option>@locations</option>
+                                                    }
+                                                </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <label style="margin-left:30px; margin-top:10px;" for="input_max_capacity">Kapasite</label>
+                                            <input style="margin-left:30px; margin-top:10px; max-width:100px;" name="MaxCapacity" type="number" class="form-control rounded-0" id="input_kapasite">
+                                        </div>
+
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label style="padding:10px;">Seviye</label>
+                                                <select class="form-control rounded-0" name="Level" style="max-width:100px;">
+
+                                                    @foreach (var level in Model.Levels)
+                                                    {
+                                                        <option>@level</option>
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - - - - - - - Fiyat İskonto - - - - - - - - - - - - - - - - -->
+                            <div class="container" style="margin-bottom:30px;margin-left:0;padding-bottom:10px; background-color:lavender">
+                                
+                                <div class="row">
+                                    <div class="form-group d-inline-flex" style="margin-top:10px">
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                                <div class="input-group-prepend">
+                                                    <label style="font-weight:bold;">Ders Başı Fiyat</label>
+                                                    
+                                                </div>
+                                                <div style="display:flex;">
+                                            <span class="input-group-text" style="font-weight:bold">
+                                                ₺
+                                            </span>
+                                                <input type="number"  style="max-width:120px;" class="form-control" id="input_price" placeholder="Fiyat...">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                            <div class="input-group-prepend">
+                                                <label style="font-weight:bold;">İndirim-1</label>
+
+                                            </div>
+                                            <div style="display:flex;">
+                                                <span class="input-group-text" style="font-weight:bold">
+                                                    %
+                                                </span>
+                                                <input type="number" style="max-width:80px;" class="form-control" id="discount1" value="5">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                            <div class="input-group-prepend">
+                                                <label style="font-weight:bold;">İndirim-2</label>
+
+                                            </div>
+                                            <div style="display:flex;">
+                                                <span class="input-group-text" style="font-weight:bold">
+                                                    %
+                                                </span>
+                                                <input type="number" style="max-width:80px;" class="form-control" id="discount2" value="10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group d-inline-flex" style="margin-top:10px">
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                            <div class="input-group-prepend">
+                                                <label style="font-weight:bold;">İndirim-3</label>
+
+                                            </div>
+                                            <div style="display:flex;">
+                                                <span class="input-group-text" style="font-weight:bold">
+                                                    %
+                                                </span>
+                                                <input type="number" style="max-width:80px;" class="form-control" id="discount3" value="15">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                            <div class="input-group-prepend">
+                                                <label style="font-weight:bold;">İndirim-4</label>
+
+                                            </div>
+                                            <div style="display:flex;">
+                                                <span class="input-group-text" style="font-weight:bold">
+                                                    %
+                                                </span>
+                                                <input type="number" style="max-width:80px;" class="form-control" id="discount4" value="25">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-4">
+                                            <div class="input-group-prepend">
+                                                <label style="font-weight:bold;">İndirim-5</label>
+
+                                            </div>
+                                            <div style="display:flex;">
+                                                <span class="input-group-text" style="font-weight:bold">
+                                                    %
+                                                </span>
+                                                <input type="number" style="max-width:80px;" class="form-control" id="discount5" value="50">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                              <input type="text" class="hidden" name="AllCoursePeriod" id="coursePeriod" placeholder="Kurs İsmi Giriniz...">
+             
+                        </div>
+                            <div class="card-footer">
+                            <button type="submit" class="btn" id="gonder" style="background-color:aliceblue;font-weight:bold;">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@Html.Partial("confirmationAndErrorModals")
+
+
+@section AdditionalScripts
+{
+
+    
+    <script src="~/js/dateTimePicker/daterangepicker.js"></script>
+
+    <script src="~/js/dateTimePicker/tempusdominus-bootstrap-4.min.js"></script>
+
+        <script>
+        $('#input_kurs_donem').daterangepicker()
+
+        $('.timepicker_days').datetimepicker({
+            format: 'LT'
+        })
+
+        var alertParagraph = '';
+       
+
+            $('#gonder').on('click', function () {
+            event.preventDefault();
+
+            continueExecution = true;
+                
+            if (!continueExecution) {
+                    return;
+                }
+
+                var periyod = $('#input_kurs_donem').val();
+
+                var dateRange = periyod.split(" - ");
+                var startDate = new Date(dateRange[0]);
+                var endDate = new Date(dateRange[1]);
+
+                var currentDate = new Date();
+                currentDate.setHours(0, 0, 0);
+                currentDate.setMilliseconds(0);
+
+                if (currentDate.getTime() === startDate.getTime() && currentDate.getTime() === endDate.getTime()) {
+
+                    $('#confirmation-modal-warning-paragraph').html('Kurs Başlangıç ve Bitiş Tarihleri Bugün. <br>');
+                    $('#confirmation-modal').modal('show');
+
+                    $('.confirmation-modal-no-button').on('click', function () {
+                        $('#confirmation-modal').modal('hide');
+                        continueExecution = false;
+                        return;
+                    });
+
+                    $('.confirmation-modal-yes-button').on('click', function () {
+                        $('#confirmation-modal').modal('hide');
+                        showSecondModal();
+                    });
+
+                }
+                else {
+                    showSecondModal();
+                }
+
+                function showSecondModal() {
+
+                    if ($('#input_kurs_adi').val().trim() === '') {
+                        alertParagraph += '<p>Kurs Adı Boş Olamaz.<br></p>';
+                    }
+
+                    if ($('#input_sure').val() === '') {
+                        alertParagraph += '<p>Kurs Süresi Boş Olamaz.<br></p>';
+                    }
+                    if ($('#input_sure').val() < 0) {
+                        alertParagraph += '<p>Kurs Süresi Negatif Olamaz.<br></p>';
+                    }
+
+                    var counter = 0;
+
+                    $('.day-checkbox').each(function (index) {
+                        if ($(this).prop('checked')) {
+                            var secondItem = $('.datetimepicker-input').eq(index);
+                            if (secondItem.val().trim() === '') {
+                                alertParagraph += '<p>Seçilen Gün İçin Başlangıç Zamanı Girilmesi Gerekmektedir.<br></p>';
+                            }
+                            counter++;
+                        }
+                    });
+                    if (counter === 0) {
+                        alertParagraph += '<p>En Az Bir Kurs Günü Seçilmelidir.<br></p>';
+                    }
+                    if ($('#instructorSelect').val() === '') {
+                    alertParagraph += '<p>Öğretmen İsmi Boş Olamaz.<br></p>';
+                    }
+
+                    if ($('#input_kapasite').val() === '') {
+                        alertParagraph += '<p>Kurs Kapasitesi Boş Olamaz.<br></p>';
+                    }
+                    if ($('#input_price').val() === '') {
+                        alertParagraph += '<p>Fiyat Boş Olamaz.<br></p>';
+                    }
+                    if ($('#input_kapasite').val() < 0) {
+                        alertParagraph += '<p>Kurs Kapasitesi Negatif Olamaz.<br></p>';
+                    }
+                    if ($('#input_price').val() < 0) {
+                        alertParagraph += '<p>Fiyat Negatif Olamaz.<br></p>';
+                    }
+
+                    if (alertParagraph !== '') {
+
+                        $('.error-modal-body').html(alertParagraph);
+
+                        $('#error-modal').modal('show');
+
+                        $('.error-modal-ok-button').on('click', function () {
+                            $('#error-modal').modal('hide');
+                        });
+
+                        alertParagraph = '';
+
+                    }
+
+                    else {
+                    var schedules = GenerateSchedules();
+
+                    // Format the dates as strings in "YYYY-MM-DD HH:MM" format
+                    var formattedSchedules = schedules.map(function (date) {
+                        return date.getFullYear() +
+                            ("0" + (date.getMonth() + 1)).slice(-2) +
+                            ("0" + date.getDate()).slice(-2) +
+                            ("0" + date.getHours()).slice(-2) +
+                            ("0" + date.getMinutes()).slice(-2) ;
+                    });
+
+                    // Join the formatted schedules array into a single string, separated by a delimiter
+                    var schedulesString = formattedSchedules.join(', ');
+
+                    // Set the value of the #coursePeriod input field
+                    $('#coursePeriod').val(schedulesString);
+
+                    console.log (schedulesString)
+                   
+                        var selectedCourseNames = $('#relatedCoursesOptionName').val();
+                        var selectedCourseIDs = [];
+
+                        $('#relatedCoursesOptionId option').each(function (index, option) {
+                        if ($.inArray(option.value, selectedCourseNames) !== -1) {
+                            selectedCourseIDs.push(option.value);
+                            }
+                        });
+
+                    console.log(selectedCourseIDs.join(','))
+                    $('#relatedCourses').val(selectedCourseIDs.join(','));
+
+
+
+                        var kursGirisViewModel = $('form').serialize();
+
+                        $.post('/Panel/InsertKursData', kursGirisViewModel, function (response) {
+                            
+                            if (response.success) {
+                            
+                                alert('Kurs Başarıyla Kaydedildi.');
+                            } else {
+                                
+                                alert('Kurs Oluşturulurken Hata İle Karşılaşıldı.');
+                            }
+                        });
+
+                    }
+                }
+                function GenerateSchedules() {
+
+                    var durationMinutes = parseInt($('#input_sure').val(), 10);
+                    var periyod = $('#input_kurs_donem').val();
+                    
+                    var dateRange = periyod.split(" - ");
+
+                    var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+                    var startDate = new Date(dateRange[0]);
+                    var startDayIndex = (startDate.getDay() + 6) % 7;
+                    var startDayName = daysOfWeek[startDayIndex];
+                    
+                    var endDate = new Date(dateRange[1]);
+                    var endDayIndex = (endDate.getDay() + 6) % 7;
+                    var endDayName = daysOfWeek[endDayIndex];
+
+                    var selectedDays = [];
+                    var selectedHours = [];
+
+                    $('.day-checkbox:checked').each(function () {
+                        selectedDays.push($(this).attr('id').replace('checkbox_', ''));
+                    });
+
+                    $('.time-range').each(function () {
+                        selectedHours.push($(this).val());
+                    });
+
+
+                    var schedules = [];
+
+                    var weekNumber = Math.ceil((endDate - startDate) / ((1000 * 60 * 60 * 24 * 7)))
+
+                    for (var schelduesForEachWeek = 0; schelduesForEachWeek <= weekNumber; schelduesForEachWeek++   ) { 
+
+                        for (var dayIndex = 0; dayIndex < selectedDays.length; dayIndex++) {
+                            
+                        var currentDay = selectedDays[dayIndex];
+                        var currentDateIndex = daysOfWeek.indexOf(currentDay);
+
+                        var currentHourIndex = daysOfWeek.indexOf(currentDay);
+
+                        var currentHour = selectedHours[currentHourIndex];
+
+
+                            var startDateForCurrentWeek = new Date(startDate); 
+                            startDateForCurrentWeek.setDate(startDateForCurrentWeek.getDate() + (7 * schelduesForEachWeek));
+
+
+                            var startDateIndex = (startDateForCurrentWeek.getDay() + 6) % 7;
+
+
+                        if (schelduesForEachWeek === 0 && startDateIndex > currentDateIndex) {
+                                continue;
+                           
+                            }
+
+                        if (schelduesForEachWeek === weekNumber && currentDateIndex > startDateIndex) {
+                            break;
+                            
+                            }
+
+                            var currentTime = new Date(startDateForCurrentWeek);
+
+                        if (startDateIndex > currentDateIndex) {
+
+                            currentTime.setDate(currentTime.getDate() - (startDateIndex - currentDateIndex));
+
+                            }
+
+                        if (startDateIndex < currentDateIndex) {
+
+                            currentTime.setDate(currentTime.getDate() + (currentDateIndex - startDateIndex));
+
+                            }
+
+                            var day = daysOfWeek[currentDateIndex];
+
+                            var hourParts = currentHour.split(':');
+                            if (hourParts.length === 2) {
+                                var hours = parseInt(hourParts[0], 10);
+                                var minutes = parseInt(hourParts[1], 10);
+
+                                if (currentHour.includes("PM") && hours < 12) {
+                                    hours += 12;
+                                }
+
+                                // Check for "AM" and reset to 0 hours if it's 12 AM
+                                if (currentHour.includes("AM") && hours === 12) {
+                                    hours = 0;
+                                }
+
+                                currentTime.setHours(hours);
+                                currentTime.setMinutes(minutes);
+                            }
+                         
+
+                                if (currentTime <= endDate) {
+                                    schedules.push(currentTime);
+                                    }
+                                
+                        
+                        }
+                    }
+
+                    return schedules;
+
+                }
+            });
+
+
+
+        </script>
+}

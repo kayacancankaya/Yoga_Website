@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewData["Title"] = "Katılımcı Kayıt";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+
+@model Pan.Models.DbClasses.Attendees
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Katılımcı Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item active">Katılımcı Kayıt</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Yeni Kayıt</h3>
+                    </div>
+
+
+                    <form>
+                        <div class="card-body">
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="input_katilimci_adi" style="padding:10px;">Adı</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" name="FirstName" id="input_katilimci_adi" placeholder="İsim Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="input_katilimci_soyadi" style="padding:10px;">Soyadı</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" name="LastName" id="input_katilimci_soyadi" placeholder="Soyisim Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Email</label>
+                                            <input type="email" class="form-control form-control-border border-width-2" name="Email" id="input_katilimci_mail" placeholder="Email Adresi Giriniz...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="input_katilimci_telefon" style="padding:10px;">Telefon</label>
+                                            <input type="tel" class="form-control form-control-border border-width-2" name="Phone" id="input_katilimci_telefon" placeholder="Telefon Numarası Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="input_katilimci_address" style="padding:10px;">Adres</label>
+                                            <textarea rows="2" class="form-control form-control-border border-width-2" name="Address" id="input_katilimci_address"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="input_katilimci_acil" style="padding:10px;">Acil Durum İletişim</label>
+                                            <input type="tel" class="form-control form-control-border border-width-2" name="EmergencyContact" id="input_katilimci_acil" placeholder="İletişim Numarası Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="input_katilimci_additional_info" style="padding:10px;">İlave Bilgiler</label>
+                                            <textarea rows="2" class="form-control form-control-border border-width-2" name="Descriptions" id="input_katilimci_additional_info"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="gonder" style="background-color:aliceblue;font-weight:bold;">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Uyarı</h5>
+                <button type="button" class="close confirmation-modal-no-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-modal-warning-paragraph"></p>
+                <p>Devam Etmek İstiyor Musunuz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary confirmation-modal-no-button" data-dismiss="modal">Hayır</button>
+                <button type="button" class="btn btn-primary confirmation-modal-yes-button">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="error-modal-label">Hata</h5>
+                <button type="button" class="close error-modal-ok-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body error-modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger error-modal-ok-button" data-dismiss="modal">Tamam</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section AdditionalScripts
+    {
+    
+    
+    <script>
+    
+        var alertParagraph = '';
+
+
+        $('#gonder').on('click', function () {
+            event.preventDefault();
+
+            continueExecution = true;
+
+            if (!continueExecution) {
+                return;
+            }
+
+            if ($('#input_katilimci_adi').val().trim() === '') {
+                alertParagraph += '<p>Katılımcı Adı Boş Olamaz.<br></p>';
+            }
+
+            if ($('#input_katilimci_soyadi').val().trim() === '') {
+                alertParagraph += '<p>Katılımcı Soyadı Boş Olamaz.<br></p>';
+            }
+            
+            if ($('#input_katilimci_telefon').val().trim() === '') {
+                alertParagraph += '<p>Telefon Boş Olamaz.<br></p>';
+            }
+
+            var emailInput = document.getElementById('input_katilimci_mail');
+            var telefonInput = document.getElementById('input_katilimci_telefon');
+            var acilInput = document.getElementById('input_katilimci_acil');
+            var phonePattern = /^(05\d{9}|5\d{9})$/;
+           
+            if ($('#input_katilimci_email').val() !== '') {
+                if (emailInput.checkValidity() === false) {
+                    alertParagraph += '<p>Email Formatı Uygun Değil.<br></p>'; 
+                }
+            }
+            if ($('#input_katilimci_telefon').val() !== '') {
+                if (!phonePattern.test(telefonInput.value)) {
+                    alertParagraph += '<p>Telefon Formatı Uygun Değil.<br></p>';
+                }
+            }
+
+            if ($('#input_katilimci_acil').val().trim() === '') {
+                alertParagraph += '<p>Acil İletişim Bilgisi Boş Olamaz.<br></p>';
+            }
+
+
+            if ($('#input_katilimci_acil').val() !== '') {
+                if (!phonePattern.test(acilInput.value)) {
+                    alertParagraph += '<p>Acil İletişim Formatı Uygun Değil.<br></p>';
+                }
+            }
+
+            if (alertParagraph !== '') {
+
+                $('.error-modal-body').html(alertParagraph);
+
+                $('#error-modal').modal('show');
+
+                $('.error-modal-ok-button').on('click', function () {
+                    $('#error-modal').modal('hide');
+                });
+
+                alertParagraph = '';
+
+            }
+
+            else {
+                
+                var attendees = $('form').serialize();
+
+                $.post('/Panel/InsertStudentData', attendees, function (response) {
+
+                    if (response.success) {
+
+                        alert(response.message);
+                        location.reload();
+                    } else {
+
+                        alert(response.message);
+                    }
+                });
+
+            }
+            
+        });
+
+
+
+    </script>
+}

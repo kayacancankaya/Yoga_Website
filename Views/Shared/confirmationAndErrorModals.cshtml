@@ -1,0 +1,40 @@
+﻿<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Uyarı</h5>
+                <button type="button" class="close confirmation-modal-no-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-modal-warning-paragraph"></p>
+                <p>Devam Etmek İstiyor Musunuz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary confirmation-modal-no-button" data-dismiss="modal">Hayır</button>
+                <button type="button" class="btn btn-primary confirmation-modal-yes-button">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="error-modal-label">Hata</h5>
+                <button type="button" class="close error-modal-ok-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body error-modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger error-modal-ok-button" data-dismiss="modal">Tamam</button>
+            </div>
+        </div>
+    </div>
+</div>

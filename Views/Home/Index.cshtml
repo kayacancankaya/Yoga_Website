@@ -1,0 +1,1128 @@
+﻿
+@{
+    ViewData["Title"] = "Pan Yoga";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Title{
+    <title>Pan Yoga</title>
+}
+@section KeywordsandDescription{
+    <meta name="keywords" content="Yoga Eğitimi,Etkinlik,Challenge,Pilates Eğitimi,Aletli Reformer,Pilates Ürünleri">
+    <meta name="description" content="Pan Yoga Yoga ve Pilates Eğitimleri ile Doğa Dostu Yoga Ürünleri sunan bir spor markasıdır.">
+}
+
+
+@model Pan.Models.DbClasses.ViewModels.IndexViewModel
+
+<!-- - - - - - - - - - - - - - Revolution Slider - - - - - - - - - - - - - - - - -->
+
+<div class="rev-slider-wrapper">
+
+    <div id="rev-slider" class="rev-slider tp-simpleresponsive" data-version="5.0">
+
+        <ul>
+ 
+            <li data-transition="fade">
+
+                <img src="images/1920x858_bg1.jpg" class="rev-slidebg" alt="">
+
+                <!-- - - - - - - - - - - - - - Layer 1 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme"
+                     data-x="['left','left','left','left']" data-hoffset="30"
+                     data-y="['middle','middle','middle','middle']" data-voffset="-110"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":150,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    <div class="section-pre-title">pan yoga'ya HOŞGELDİNİZ...</div>
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 1 - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Layer 2 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme scaption-dark-large"
+                     data-x="['left','left','left','left']" data-hoffset="30"
+                     data-y="['middle','middle','middle','middle']" data-voffset="0"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":450,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    Bedeninizi Doğa ile <br> Buluşturmanın Sanatı
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 2 - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Layer 3 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme"
+                     data-x="['left','left','left','left']" data-hoffset="30"
+                     data-y="['middle','middle','middle','middle']" data-voffset="130"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":750,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    <a href="#" class="btn btn-big btn-style-3">TAKVİMİ GÖR</a>
+                    <a href="#" class="btn btn-big">Hakkımızda Daha Fazlası</a>
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 3 - - - - - - - - - - - - - - - - -->
+
+            </li> 
+
+            <li data-transition="fade">
+
+                <img src="images/1920x858_bg2.jpg" class="rev-slidebg" alt="">
+
+                <!-- - - - - - - - - - - - - - Layer 1 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme"
+                     data-x="['right','right','right','right']" data-hoffset="410"
+                     data-y="['middle','middle','middle','middle']" data-voffset="-110"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":150,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    <div class="section-pre-title">KURSİYERLERE ÖZEL</div>
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 1 - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Layer 2 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme scaption-dark-large"
+                     data-x="['right','right','right','right']" data-hoffset="50"
+                     data-y="['middle','middle','middle','middle']" data-voffset="0"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":150,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    3 Hafta Sınırsız <br> Yoga Dersleri Sadece <span>1239₺</span>
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 2 - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Layer 3 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme"
+                     data-x="['right','right','right','right']" data-hoffset="440"
+                     data-y="['middle','middle','middle','middle']" data-voffset="130"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":450,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    <a href="#" class="btn btn-big btn-style-3">Detay</a>
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 3 - - - - - - - - - - - - - - - - -->
+
+            </li> 
+
+            <li data-transition="fade">
+
+                <img src="images/1920x858_bg3.jpg" class="rev-slidebg" alt="">
+
+                <!-- - - - - - - - - - - - - - Layer 1 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme scaption-dark-large align-center"
+                     data-x="['center','center','center','center']" data-hoffset="0"
+                     data-y="['middle','middle','middle','middle']" data-voffset="-20"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":150,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    Geniş Yelpezede Ürünler, <br> Workshoplar & Etkinlikler
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 1 - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Layer 2 - - - - - - - - - - - - - - - - -->
+
+                <div class="tp-caption tp-resizeme"
+                     data-x="['center','center','center','center']" data-hoffset="0"
+                     data-y="['middle','middle','middle','middle']" data-voffset="120"
+                     data-whitespace="nowrap"
+                     data-frames='[{"delay":750,"speed":2000,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"y:[175%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                     data-responsive_offset="on"
+                     data-elementdelay="0.05">
+                    <a href="#" class="btn btn-big btn-style-3">EtKİNLİKLER</a>
+                    <a href="#" class="btn btn-big">ÜRÜNLER</a>
+                </div>
+
+                <!-- - - - - - - - - - - - - - End of Layer 2 - - - - - - - - - - - - - - - - -->
+
+            </li> 
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- - - - - - - - - - - - - - End of Slider - - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - Info Box and Schedule Starts - - - - - - - - - - - - - - - - -->
+
+<div id="content">
+
+    <!-- Info box -->
+    <div class="info-boxes style-2 flex-row no-gutters item-col-4">
+
+        <div class="info-box" data-bg="images/480x338_bg1.jpg">
+
+            <h3 class="box-title"><a href="#">Yogada Yeni Misiniz?</a></h3>
+            <p>Yogaya yeni başlayan veya başlamayı düşünenler için önerilerimiz ve <br> sunduğumuz hizmetler...</p>
+            <a asp-controller="Home" asp-action="Newtoyoga" class="btn btn-style-2">Detay</a>
+
+        </div>
+
+        <div class="info-box" data-bg="images/480x338_bg2.jpg">
+
+            <h3 class="box-title"><a href="#">Stüdyolar</a></h3>
+            <p>Birbirinden kıymetli ve deneyimli eğitmenlerimiz tarafından yüzyüze verilen <br> eğitimlerin detayları...</p>
+            <a asp-controller="Home" asp-action="Studyolarimiz" class="btn btn-style-2">Detay</a>
+
+        </div>
+
+        <div class="info-box" data-bg="images/480x338_bg3.jpg">
+
+            <h3 class="box-title"><a href="#">Eğitimler</a></h3>
+            <p>Her seviye ve isteğe uygun hizmet anlayışı ile düzenlediğimiz <br> eğitimlerimiz hakkında bilgi almak...</p>
+            <a asp-controller="Home" asp-action="Egitimlerimiz" class="btn btn-style-2">Detay</a>
+
+        </div>
+
+        <div class="info-box" data-bg="images/480x338_bg4.jpg">
+
+            <h3 class="box-title"><a href="#">Etkinlikler</a></h3>
+            <p>Yaklaşan Farkındalık faaliyetlerimiz, Workshoplar, İnzivalar <br> ve daha fazlası için...</p>
+            <a asp-controller="Home" asp-action="Etkinliklerimiz" class="btn btn-style-2">Detay</a>
+
+        </div>
+
+    </div>
+    <!-- Schedule -->
+    @Html.Partial("Schedule",Model.schedule);
+
+</div>
+
+<!-- - - - - - - - - - - - - - Info Box and Schedule Ends - - - - - - - - - - - - - - - - -->
+<!-- Testimonial-->
+<div class="page-section parallax-section text-color-light" data-bg="images/1920x1000_bg1.jpg">
+
+    <div class="container wide2">
+
+        <div class="content-element4">
+
+            <div class="section-pre-title">Gerİ Dönüşler</div>
+            <h2 class="section-title">Katılımcılarımızdan...</h2>
+
+        </div>
+
+        <div class="carousel-type-2">
+
+            <div class="owl-carousel testimonial-holder" data-max-items="3" data-autoplay="true">
+
+                <!-- - - - - - - - - - - - - - Testimonial - - - - - - - - - - - - - - - - -->
+                <div class="testimonial bg1">
+
+                    <blockquote>
+                        <p>“Yogo Yogo Yogo ” </p>
+                        <div class="author-box">
+
+                            <span class="author-icon"><i class="svg"></i></span>
+                            <div class="author-info">
+                                <div class="author">Şenay Şen</div>
+                                <a href="#" class="author-position">İzmir</a>
+                            </div>
+
+                        </div>
+                    </blockquote>
+
+                </div>
+                <!-- /Carousel Item -->
+                <!-- - - - - - - - - - - - - - Testimonial - - - - - - - - - - - - - - - - -->
+                <div class="testimonial bg2">
+
+                    <blockquote>
+                        <p>“Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euismod in, auctor ut, ligula. Aliquam dapibus tincidunt metus.” </p>
+                        <div class="author-box">
+
+                            <span class="author-icon"><i class="svg"></i></span>
+                            <div class="author-info">
+                                <div class="author">Camala Haddon</div>
+                                <a href="#" class="author-position">Los Angeles, CA</a>
+                            </div>
+
+                        </div>
+                    </blockquote>
+
+                </div>
+                <!-- /Carousel Item -->
+                <!-- - - - - - - - - - - - - - Testimonial - - - - - - - - - - - - - - - - -->
+                <div class="testimonial bg3">
+
+                    <blockquote>
+                        <p>“Vestibulum sed ante. Donec sagittis euismod purus. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.”</p>
+                        <div class="author-box">
+
+                            <span class="author-icon"><i class="svg"></i></span>
+                            <div class="author-info">
+                                <div class="author">Patrick Pool</div>
+                                <a href="#" class="author-position">San Dirgo, CA</a>
+                            </div>
+
+                        </div>
+                    </blockquote>
+
+                </div>
+                <!-- /Carousel Item -->
+
+            </div>
+
+            <a href="#" class="btn btn-style-2">Daha Fazla...</a> 
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Meet Our Team-->
+<div class="page-section-bg">
+
+    <div class="container wide2">
+
+        <div class="content-element4">
+
+            <div class="section-pre-title">Eğitmenler</div>
+            <h2 class="section-title">Profesyonel Eğitmenlerimizle Tanışın</h2>
+
+        </div>
+
+        <div class="carousel-type-2">
+
+            <div class="team-holder owl-carousel" data-item-margin="30" data-max-items="5">
+
+                <!-- team element -->
+                <div class="team-item">
+
+                    <a href="#" class="member-photo">
+                        <img src="images/289x312_photo1.jpg" alt="">
+                    </a>
+                    <div class="team-desc">
+                        <div class="member-info">
+                            <h5 class="member-name"><a href="#">Vicky Johnson</a></h5>
+                            <h6 class="member-position">Founder, Hatha Yoga Teacher</h6>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- team element -->
+                <div class="team-item">
+
+                    <a href="#" class="member-photo">
+                        <img src="images/289x312_photo2.jpg" alt="">
+                    </a>
+                    <div class="team-desc">
+                        <div class="member-info">
+                            <h5 class="member-name"><a href="#">Bradley Grosh</a></h5>
+                            <h6 class="member-position">Ashtanga Yoga Teacher</h6>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- team element -->
+                <div class="team-item">
+
+                    <a href="#" class="member-photo">
+                        <img src="images/289x312_photo3.jpg" alt="">
+                    </a>
+                    <div class="team-desc">
+                        <div class="member-info">
+                            <h5 class="member-name"><a href="#">Stella Healy</a></h5>
+                            <h6 class="member-position">Yin & Vinyasa Yoga Teacher</h6>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- team element -->
+                <div class="team-item">
+
+                    <a href="#" class="member-photo">
+                        <img src="images/289x312_photo4.jpg" alt="">
+                    </a>
+                    <div class="team-desc">
+                        <div class="member-info">
+                            <h5 class="member-name"><a href="#">Olivia Franklin</a></h5>
+                            <h6 class="member-position">Hatha Yoga Teacher</h6>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- team element -->
+                <div class="team-item">
+
+                    <a href="#" class="member-photo">
+                        <img src="images/289x312_photo5.jpg" alt="">
+                    </a>
+                    <div class="team-desc">
+                        <div class="member-info">
+                            <h5 class="member-name"><a href="#">Alan Smith</a></h5>
+                            <h6 class="member-position">Vinyasa Yoga Teacher</h6>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Oppurtunities-->
+<div class="call-out bg-section" data-bg="images/1920x286_bg1.jpg">
+
+    <div class="container wide2">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7 col-md-12">
+
+                <div class="align-center">
+                    <h2 class="call-title var2">Eğitim Paketleri &amp; Üyelik</h2>
+                    <p>Eğitim Paketi ve Üyelik Satın Alarak Fırsatlardan Yararlanın!</p>
+                    <a href="#" class="btn btn-style-6 btn-big">İncele</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Uygulamayı İndir-->
+<div class="page-section-bg half-bg-col with-phone-img">
+
+    <div class="img-col-left"><div class="col-bg phone" data-bg="images/445x468_phone.jpg"></div></div>
+
+    <div class="container">
+
+        <div class="row align-content-center">
+
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+
+                <h2>Uygulamamızı İndirin</h2>
+                <p class="content-element4">Yoga Ürün ve Eğitimlerizi her yerden <br> uygulamamızı kullanarak edinin.</p>
+                <div class="store-btns">
+
+                    <a href="#"><img src="images/google_btn.png" alt=""></a>
+                    <a href="#"><img src="images/app_btn.png" alt=""></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+      <!-- Events & Workshops -->
+      <div class="page-section-bg half-bg-col text-color-light">
+
+        <div class="img-col-left"><div class="col-bg" data-bg="images/960x884_bg2.jpg"></div></div>
+        <div class="img-col-right"><div class="col-bg" data-bg="images/960x884_bg1.jpg"></div></div>
+
+        <div class="container wide2">
+
+          <div class="row align-content-center">
+
+            <div class="col-lg-5">
+
+              <div class="content-element4">
+
+                <div class="section-pre-title">Etkİnlİk & Workshoplar</div>
+                <h2 class="section-title">Yaklaşan Etkinlikler</h2>
+
+              </div>
+
+              <div class="carousel-type-2">
+
+                <div class="owl-carousel flex-row entry-box style-2" data-max-items="2" data-item-margin="30">
+
+                  <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
+                  <div class="entry">
+
+                    <!-- - - - - - - - - - - - - - Entry attachment - - - - - - - - - - - - - - - - -->
+                    <div class="thumbnail-attachment">
+                      <a href="#"><img src="images/237x156_img1.jpg" alt=""></a>
+                    </div>
+
+                    <!-- - - - - - - - - - - - - - Entry body - - - - - - - - - - - - - - - - -->
+                    <div class="entry-body">
+
+                      <h6 class="entry-title"><a href="#">Güneşe Selam Aya Lanet Yogosu</a></h6>
+                      <div class="our-info vr-type">
+
+                        <div class="info-item">
+                          <i class="licon-clock3"></i>
+                          <div class="wrapper">
+                            <span>Oca 18, 2024  08:00 AM - 10:00 AM</span>
+                          </div>
+                        </div>
+                        <div class="info-item">
+                          <i class="licon-map-marker"></i>
+                          <div class="wrapper">
+                            <span>Hüsnü Güzel Güneş Senetoryum ve Wellbeing Aşırı Kompleksi</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="entry-price">
+
+                        <span class="product-price">35 TL</span>
+                        <a href="#" class="btn btn-small">Kaydol</a>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
+                  <div class="entry">
+
+                    <!-- - - - - - - - - - - - - - Entry attachment - - - - - - - - - - - - - - - - -->
+                    <div class="thumbnail-attachment">
+                      <a href="#"><img src="images/237x156_img2.jpg" alt=""></a>
+                    </div>
+
+                    <!-- - - - - - - - - - - - - - Entry body - - - - - - - - - - - - - - - - -->
+                    <div class="entry-body">
+
+                      <h6 class="entry-title"><a href="#">Uyanışın Sanatı</a></h6>
+                      <div class="our-info vr-type">
+
+                        <div class="info-item">
+                          <i class="licon-clock3"></i>
+                          <div class="wrapper">
+                            <span>Oca 19, 2024  08:00 AM - 10:00 AM</span>
+                          </div>
+                        </div>
+                        <div class="info-item">
+                          <i class="licon-map-marker"></i>
+                          <div class="wrapper">
+                            <span>Aşko Veysel</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="entry-price">
+
+                        <span class="product-price free">Bedeve</span>
+                        <a href="#" class="btn btn-small">Kaydol</a>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <a href="#" class="btn btn-style-2">Daha Fazla Etkinlik</a>
+
+              </div>
+
+            </div>
+            <div class="col-lg-6 offset-lg-1"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Store -->
+      <div class="page-section-bg">
+
+        <div class="container wide2">
+
+          <div class="content-element4">
+
+            <div class="section-pre-title">Yoga ÜrÜnlerİ</div>
+            <h2 class="section-title">Mağazamızdan</h2>
+
+          </div>
+
+          <div class="carousel-type-2">
+
+            <div class="owl-carousel products-holder" data-item-margin="30" data-max-items="5">
+
+              <!-- Product -->
+              <div class="product">
+
+                <!-- - - - - - - - - - - - - - Product Image - - - - - - - - - - - - - - - - -->
+                <figure class="product-image">
+                  <a href="#"><img src="images/289x286_img1.jpg" alt=""></a>
+                </figure>
+                <!-- - - - - - - - - - - - - - End of Product Image - - - - - - - - - - - - - - - - -->
+
+                <!-- - - - - - - - - - - - - - Product Description - - - - - - - - - - - - - - - - -->
+                <div class="product-description">
+
+                  <a href="#" class="product-cat">Mat</a>
+
+                  <h6 class="product-name"><a href="#">Doğal Kauçuk Kaydırmaz Yoga Matı</a></h6>
+
+                  <div class="pricing-area">
+
+                    <div class="product-price">
+                      $19.95
+                    </div>
+
+                    <ul class="rating">
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li class="empty"><i class="licon-star"></i></li>
+                    </ul>
+
+                  </div>
+
+                  <a href="#" class="btn btn-small btn-style-3">Sepete Ekle</a>
+
+                </div>
+                <!-- - - - - - - - - - - - - - End of Product Description - - - - - - - - - - - - - - - - -->
+
+              </div>
+
+              <!-- Product -->
+              <div class="product">
+
+                <!-- - - - - - - - - - - - - - Product Image - - - - - - - - - - - - - - - - -->
+                <figure class="product-image">
+                  <a href="#"><img src="images/289x286_img2.jpg" alt=""></a>
+                </figure>
+                <!-- - - - - - - - - - - - - - End of Product Image - - - - - - - - - - - - - - - - -->
+
+                <!-- - - - - - - - - - - - - - Product Description - - - - - - - - - - - - - - - - -->
+                <div class="product-description">
+
+                  <a href="#" class="product-cat">Clothes</a>
+
+                  <h6 class="product-name"><a href="#">Yoga T-Shirt Namaste Love </a></h6>
+
+                  <div class="pricing-area">
+
+                    <div class="product-price">
+                      <span>$48.95</span> $38.95
+                    </div>
+
+                  </div>
+
+                  <a href="#" class="btn btn-small btn-style-3">Add To Cart</a>
+
+                </div>
+                <!-- - - - - - - - - - - - - - End of Product Description - - - - - - - - - - - - - - - - -->
+
+              </div>
+
+              <!-- Product -->
+              <div class="product">
+
+                <!-- - - - - - - - - - - - - - Product Image - - - - - - - - - - - - - - - - -->
+                <figure class="product-image">
+                  <a href="#"><img src="images/289x286_img3.jpg" alt=""></a>
+                </figure>
+                <!-- - - - - - - - - - - - - - End of Product Image - - - - - - - - - - - - - - - - -->
+
+                <!-- - - - - - - - - - - - - - Product Description - - - - - - - - - - - - - - - - -->
+                <div class="product-description">
+
+                  <a href="#" class="product-cat">Equipment</a>
+
+                  <h6 class="product-name"><a href="#">Light Hard Foam Yoga Blocks</a></h6>
+
+                  <div class="pricing-area">
+
+                    <div class="product-price">
+                      $11.35
+                    </div>
+
+                    <ul class="rating">
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                    </ul>
+
+                  </div>
+
+                  <a href="#" class="btn btn-small btn-style-3">Add To Cart</a>
+
+                </div>
+                <!-- - - - - - - - - - - - - - End of Product Description - - - - - - - - - - - - - - - - -->
+
+              </div>
+
+              <!-- Product -->
+              <div class="product">
+
+                <!-- - - - - - - - - - - - - - Product Image - - - - - - - - - - - - - - - - -->
+                <figure class="product-image">
+                  <a href="#"><img src="images/289x286_img4.jpg" alt=""></a>
+                </figure>
+                <!-- - - - - - - - - - - - - - End of Product Image - - - - - - - - - - - - - - - - -->
+
+                <!-- - - - - - - - - - - - - - Product Description - - - - - - - - - - - - - - - - -->
+                <div class="product-description">
+
+                  <a href="#" class="product-cat">Equipment</a>
+
+                  <h6 class="product-name"><a href="#">Yoga Belt</a></h6>
+
+                  <div class="pricing-area">
+
+                    <div class="product-price">
+                      $13.95
+                    </div>
+
+                    <ul class="rating">
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                    </ul>
+
+                  </div>
+
+                  <a href="#" class="btn btn-small btn-style-3">Add To Cart</a>
+
+                </div>
+                <!-- - - - - - - - - - - - - - End of Product Description - - - - - - - - - - - - - - - - -->
+
+              </div>
+
+              <!-- Product -->
+              <div class="product">
+
+                <!-- - - - - - - - - - - - - - Product Image - - - - - - - - - - - - - - - - -->
+                <figure class="product-image">
+                  <a href="#"><img src="images/289x286_img5.jpg" alt=""></a>
+                </figure>
+                <!-- - - - - - - - - - - - - - End of Product Image - - - - - - - - - - - - - - - - -->
+
+                <!-- - - - - - - - - - - - - - Product Description - - - - - - - - - - - - - - - - -->
+                <div class="product-description">
+
+                  <a href="#" class="product-cat">Beauty</a>
+
+                  <h6 class="product-name"><a href="#">Yoga Blend Body Lotion</a></h6>
+
+                  <div class="pricing-area">
+
+                    <div class="product-price">
+                      $14.99
+                    </div>
+
+                    <ul class="rating">
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                      <li><i class="licon-star"></i></li>
+                    </ul>
+
+                  </div>
+
+                  <a href="#" class="btn btn-small btn-style-3">Add To Cart</a>
+
+                </div>
+                <!-- - - - - - - - - - - - - - End of Product Description - - - - - - - - - - - - - - - - -->
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Contact us -->
+    @Html.Partial("_partialContactUs", Model.contactUs);
+
+      <!-- Google map -->
+      <div class="map-section">
+
+        <div id="googleMap" class="map-container"></div>
+
+      </div>
+
+      <!-- Social Media -->
+      <div class="page-section">
+
+        <div class="container wide2">
+
+          <div id="instafeed" class="instagram-feed style-2" data-instagram="5">
+
+            <div class="insta-title">
+
+              <i class="icon-instagram-5"></i>
+              <h5>Bizi Instagramdan <br> Takip Edin!</h5>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div> 
+      
+      
+
+    <!-- - - - - - - - - - - - - end Content - - - - - - - - - - - - - - - -->
+@section AdditionalJs{
+    <script>
+        
+        $(document).on("click", "#nextWeekButton", function () {
+
+
+            var selectedDate = $("#selectedDate").val();
+            var isValidDate = validateDate(selectedDate)
+
+            if (!isValidDate)
+                return;
+
+            var dropdownStates = {};
+            var checkboxDayStates = {};
+            var checkboxDayTimeStates = {};
+
+
+            $('.filterDropdown').each(function () {
+                var $customSelect = $(this).closest('.mad-custom-select');
+                var selectedValue = $customSelect.find('.mad-selected-option').text() || $(this).data('default-text');
+                var dropdownName = $(this).attr('id');
+                dropdownStates[dropdownName] = selectedValue;
+            });
+
+            // Flag to check if at least one checkbox is checked
+            var atLeastOneCheckedforDay = false;
+            var atLeastOneCheckedforDayTime = false;
+
+
+            $(".checkboxDayFilters").each(function () {
+
+                checkboxDayStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDay = true;
+                }
+            });
+            $(".checkboxDayTimeFilters").each(function () {
+
+                checkboxDayTimeStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDayTime = true;
+                }
+            });
+
+            // If none of the checkboxes are checked, consider them all checked
+            if (!atLeastOneCheckedforDay) {
+                $(".checkboxDayFilters").each(function () {
+                    checkboxDayStates[$(this).attr("id")] = true;
+                });
+            }
+            if (!atLeastOneCheckedforDayTime) {
+                $(".checkboxDayTimeFilters").each(function () {
+                    checkboxDayTimeStates[$(this).attr("id")] = true;
+                });
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/Nextupdateselecteddateindex?_=" + + new Date().getTime(),
+                data: {
+                    dropdownStates: dropdownStates,
+                    checkboxDayStates: checkboxDayStates,
+                    checkboxDayTimeStates: checkboxDayTimeStates,
+                    selectedDate: selectedDate
+                },
+                cache: false,
+                success: function (data) {
+                    // Update the container that holds the schedule
+                    $("#scheduleContainer").html(data);
+                    $.MadCustomSelects();
+                },
+                error: function () {
+                    alert('Takvim Yüklenirken Hata İle Karşılaşıldı...');
+                }
+            });
+        });
+        
+        $(document).on("click", "#previousWeekButton", function () {
+
+
+            var isValidDate = validateDate($("#selectedDate").val())
+
+            if (!isValidDate)
+                return;
+
+            var selectedDate = $("#selectedDate").val();
+
+            var dropdownStates = {};
+            var checkboxDayStates = {};
+            var checkboxDayTimeStates = {};
+
+
+            $('.filterDropdown').each(function () {
+                var $customSelect = $(this).closest('.mad-custom-select');
+                var selectedValue = $customSelect.find('.mad-selected-option').text() || $(this).data('default-text');
+                var dropdownName = $(this).attr('id');
+                dropdownStates[dropdownName] = selectedValue;
+            });
+
+            // Flag to check if at least one checkbox is checked
+            var atLeastOneCheckedforDay = false;
+            var atLeastOneCheckedforDayTime = false;
+
+
+            $(".checkboxDayFilters").each(function () {
+
+                checkboxDayStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDay = true;
+                }
+            });
+            $(".checkboxDayTimeFilters").each(function () {
+
+                checkboxDayTimeStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDayTime = true;
+                }
+            });
+
+            // If none of the checkboxes are checked, consider them all checked
+            if (!atLeastOneCheckedforDay) {
+                $(".checkboxDayFilters").each(function () {
+                    checkboxDayStates[$(this).attr("id")] = true;
+                });
+            }
+            if (!atLeastOneCheckedforDayTime) {
+                $(".checkboxDayTimeFilters").each(function () {
+                    checkboxDayTimeStates[$(this).attr("id")] = true;
+                });
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/Previousupdateselecteddateindex?_=" + + new Date().getTime(),
+                data: {
+                    dropdownStates: dropdownStates,
+                    checkboxDayStates: checkboxDayStates,
+                    checkboxDayTimeStates: checkboxDayTimeStates,
+                    selectedDate: selectedDate
+                },
+                cache: false,
+                success: function (data) {
+                    $("#scheduleContainer").html(data);
+                    $.MadCustomSelects();
+                },
+                error: function () {
+                    alert('Takvim Yüklenirken Hata İle Karşılaşıldı...');
+                }
+            });
+        });
+
+        $(document).on("click", "#filterTimeButton", function () {
+
+
+            var isValidDate = validateDate($("#selectedDate").val())
+
+            if (!isValidDate)
+                return;
+
+            var selectedDate = $("#selectedDate").val();
+
+            var dropdownStates = {};
+            var checkboxDayStates = {};
+            var checkboxDayTimeStates = {};
+
+            $('.filterDropdown').each(function () {
+                var $customSelect = $(this).closest('.mad-custom-select');
+                var selectedValue = $customSelect.find('.mad-selected-option').text() || $(this).data('default-text');
+                var dropdownName = $(this).attr('id'); 
+                dropdownStates[dropdownName] = selectedValue;
+            });
+
+
+            // Flag to check if at least one checkbox is checked
+            var atLeastOneCheckedforDay = false;
+            var atLeastOneCheckedforDayTime = false;
+
+            $(".checkboxDayFilters").each(function () {
+
+                checkboxDayStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDay = true;
+                }
+            });
+            $(".checkboxDayTimeFilters").each(function () {
+
+                checkboxDayTimeStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDayTime = true;
+                }
+            });
+
+            // If none of the checkboxes are checked, consider them all checked
+            if (!atLeastOneCheckedforDay) {
+                $(".checkboxDayFilters").each(function () {
+                    checkboxDayStates[$(this).attr("id")] = true;
+                });
+            }
+
+            if (!atLeastOneCheckedforDayTime) {
+                $(".checkboxDayTimeFilters").each(function () {
+                    checkboxDayTimeStates[$(this).attr("id")] = true;
+                });
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/Schedulefilterbuttoncliked",
+                data: {
+                    dropdownStates: dropdownStates,
+                    checkboxDayStates: checkboxDayStates,
+                    checkboxDayTimeStates: checkboxDayTimeStates,
+                    selectedDate: selectedDate
+                },
+                success: function (response) {
+                    $("#scheduleContainer").html(response);
+                    $.MadCustomSelects();
+                },
+                error: function () {
+                    alert('Takvim Yüklenirken Hata İle Karşılaşıldı...');
+                }
+            });
+        });
+            
+        function validateAndUpdateDate(input) {
+            var dateFormat = /^\d{2}\.\d{2}\.\d{4}$/;
+            
+            if (input.value.match(dateFormat)) {
+                updateSelectedDay('Manualupdateselecteddateindex', input.value);
+            } else {
+                alert('Tarih Formatı Geçerli Değil. Lütfen gg.AA.yyyy. Formatında Giriş Yapınız.');
+            }
+        }
+
+        function updateSelectedDay(actionName, selectedDate) {
+            
+            var dropdownStates = {};
+            var checkboxDayStates = {};
+            var checkboxDayTimeStates = {};
+
+
+            $('.filterDropdown').each(function () {
+                var $customSelect = $(this).closest('.mad-custom-select');
+                var selectedValue = $customSelect.find('.mad-selected-option').text() || $(this).data('default-text');
+                var dropdownName = $(this).attr('id');
+                dropdownStates[dropdownName] = selectedValue;
+            });
+
+            // Flag to check if at least one checkbox is checked
+            var atLeastOneCheckedforDay = false;
+            var atLeastOneCheckedforDayTime = false;
+
+
+            $(".checkboxDayFilters").each(function () {
+
+                checkboxDayStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDay = true;
+                }
+            });
+            $(".checkboxDayTimeFilters").each(function () {
+
+                checkboxDayTimeStates[$(this).attr("id")] = $(this).prop("checked");
+                if ($(this).prop("checked")) {
+                    atLeastOneCheckedforDayTime = true;
+                }
+            });
+
+            // If none of the checkboxes are checked, consider them all checked
+            if (!atLeastOneCheckedforDay) {
+                $(".checkboxDayFilters").each(function () {
+                    checkboxDayStates[$(this).attr("id")] = true;
+                });
+            }
+            if (!atLeastOneCheckedforDayTime) {
+                $(".checkboxDayTimeFilters").each(function () {
+                    checkboxDayTimeStates[$(this).attr("id")] = true;
+                });
+            }
+            $.ajax({
+                url: "/Home/Manualupdateselecteddateindex?_=" + + new Date().getTime(),
+                type: "POST",
+                data: {
+                    dropdownStates: dropdownStates,
+                        checkboxDayStates: checkboxDayStates,
+                        checkboxDayTimeStates: checkboxDayTimeStates,
+                        selectedDate: selectedDate
+                        },
+                success: function (data) {
+                    // Update the container that holds the schedule
+                    $("#scheduleContainer").html(data);
+                    $.MadCustomSelects();
+                },
+                error: function () {
+                    alert('Takvim Yüklenirken Hata İle Karşılaşıldı...');
+                }
+            });
+        }
+
+        function validateDate(input) {
+                var dateFormat = /^\d{2}\.\d{2}\.\d{4}$/;
+                var isValid = false;
+
+                if (input.match(dateFormat)) {
+                    isValid = true;
+                }
+                else {
+                    alert('Tarih Formatı Geçerli Değil. Lütfen gg.AA.yyyy. Formatında Giriş Yapınız.');
+                }
+
+                var parts = input.split('.');
+                var day = parseInt(parts[0], 10);
+                var month = parseInt(parts[1], 10)
+                var year = parseInt(parts[2], 10);
+                var inputDate = new Date(year, month, day);
+
+                var currentDate = new Date();
+
+                if (inputDate < currentDate) {
+                    isValid = false;
+                    alert('Geçmiş Tarihli Aratma Yapılamaz.');
+                }
+
+                return isValid;
+            }
+
+    </script>
+
+
+} 

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "ClassTypes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Pan.Models.DbClasses.ClassTypes>
+
+
+@section Title{
+    <title>Pan Yoga Ders Tipleri</title>
+}
+@section KeywordsandDescription{
+    <meta name="keywords" content="Yoga Eğitimi,Online Pilates Eğitimi,Online Yoga Kursu,Yoga Challenge,Pilates Eğitimi,Aletli Reformer">
+    <meta name="description" content="@ViewBag.Description">
+}
+
+
+<!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+
+<div class="breadcrumbs-wrap">
+
+    <div class="container">
+
+        <h1 class="page-title">Kurs Açıklamaları</h1>
+
+        <ul class="breadcrumbs">
+
+            <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+            <li><span>Kurs Tipleri</span></li>
+
+        </ul>
+
+    </div>
+
+</div>
+<!-- - - - - - - - - - - - - - Content - - - - - - - - - - - - - - - - -->
+
+<div id="content">
+
+    <div class="page-section">
+
+        <div class="class-desc">
+
+            <div class="container">
+                 @{
+                    int counter = 1;
+                    foreach(var item in Model)
+                    {
+                        if (counter % 2 == 0)
+                        {
+                            <div class="content-element10" id="@item.ClassTypeID">
+                                <div class="row row-2 flex-wrap-reverse">
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <h3 class="section-title">@item.ClassName</h3>
+                                        <p>@item.Description</p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <img src="~/images/555x338_img2.jpg" alt="@item.ClassName">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="content-element10" id="@item.ClassTypeID">
+                                <div class="row row-2 flex-wrap-reverse">
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <img src="~/images/555x338_img2.jpg" alt="@item.ClassName">
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <h3 class="section-title">@item.ClassName</h3>
+                                        <p>@item.Description</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                        counter++;
+                    }
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+    @Html.Partial("_partialStartYourYogaPracticeToday")
+
+</div>
+

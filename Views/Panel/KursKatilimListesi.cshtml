@@ -1,0 +1,211 @@
+﻿@{
+    ViewData["Title"] = "Kurs Listesi";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+@model Pan.Models.DbClasses.ViewModels.AttendanceViewModel
+
+@section AdditionalCss{
+
+    <link rel="stylesheet" href="~/js/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/DataTables/datatables.css" />
+    <link href="~/datatables/buttons-2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Kurs Katılım Listesi<a class="rounded-add-button" asp-controller="Panel" asp-action="KatilimciKursKaydi" asp-route-className="@Model.ClassInfoMaster.ClassName"><i class="fas fa-plus" style="color:#fff;font-size:14px;padding:7px;"></i></a></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                        <li class="breadcrumb-item active"><a asp-controller="Panel" asp-action="KursListesi">Kurs Listesi</a></li>
+                        <li class="breadcrumb-item active">Kurs Katılım Listesi</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div style="height: 400px; overflow-y: scroll;">
+                        <div class="card-body">
+                            <table id="dataTable" class="table table-hover compact">
+                                <thead>
+                                    <tr>
+                                        <th>Katılımcı Adı</th>
+                                        <th>Eğitim Adı</th>
+                                        <th>Eğitim Tipi</th>
+                                        <th>Öğretmen</th>
+                                        <th>Tarih</th>
+                                        <th>Süre (Dk.)</th>
+                                        <th>Yer</th>
+                                        <th>Katılım Durum</th>
+                                        <th>Ödeme Durum</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                            @foreach (var registrar in Model.Registrars)
+                                            { 
+                                                <tr>
+                                                    <td>@registrar.FirstName @registrar.LastName</td>
+                                                    <td>@Model.ClassInfoMaster.ClassName</td>
+                                                    <td>
+                                                        @if (@Model.ClassInfo.ClassType != null)
+                                                        {
+                                                            @Model.ClassInfo.ClassType.ClassName
+                                                        }
+                                                        else
+                                                        {
+                                                            <text>"Ders Tipi Bulunamadı."</text>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (@Model.ClassInfo.Instructor != null)
+                                                        {
+                                                            @Model.ClassInfo.Instructor.FirstName
+                                                        }
+                                                        else
+                                                        {
+                                                            <text>"Öğretmen Bulunamadı."</text>
+                                                        }
+                                                    </td>
+
+                                                    <td>@Model.ClassInfo.Schedule</td>
+                                                    <td>@Model.ClassInfo.DurationMinutes</td>
+                                                    <td>
+                                                        @if (@Model.ClassInfo.Locations != null)
+                                                        {
+                                                            @Model.ClassInfo.Locations.LocationName
+                                                        }
+                                                        else
+                                                        {
+                                                            <text>"Mekan Bulunamadı."</text>
+                                                        }
+                                                    </td>
+ 
+                                            @{
+                                                var attendance = Model.Attendances.Where(a => a.AttendeeID == registrar.AttendeeID).Any();
+
+                                                    if(attendance)
+                                                    {
+                                                        <td style="color:lightgreen">Katıldı</td>  
+                                                    }
+                                                    if(!attendance)
+                                                    {
+                                                       <td style="color:red">Katılmadı</td>  
+                                                    }
+                                            
+                                                
+                                                var payment = Model.Payments.Where(p => p.AttendeeID == registrar.AttendeeID).Any();
+
+                                                    if(payment)
+                                                    {
+                                                        <td style="color:lightgreen">Ödendi</td>  
+                                                    }
+                                                    if(!payment)
+                                                    {
+                                                       <td style="color:red">Ödenmedi</td>  
+                                                    }
+                                            
+                                                    <td><button class="btn-edit btn-primary">Düzenle</button></td>
+                                                }
+                                                </tr>
+                                            }
+                                      
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+@section AdditionalScripts
+    {
+
+    <script src="~/DataTables/datatables.js"></script>
+
+    <script src="~/datatables/buttons-2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="~/datatables/pdfmake-0.2.7/pdfmake.min.js"></script>
+    <script src="~/datatables/pdfmake-0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(function () {
+
+                var table = $('#dataTable').DataTable({
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json',
+                    },
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+
+                    "columns": [
+                        null, null, null, null, null, null, null, null, null, null
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false
+                        }
+                    ],
+                    "dom": 'Bfrtip',  // Specify the location of the buttons
+                    "buttons": [
+                        {
+                            extend: 'copy',
+                            exportOptions: {
+                                columns: ':visible:not(:last-child)' // Exclude the last visible column
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            exportOptions: {
+                                columns: ':visible:not(:last-child)' // Exclude the last visible column
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: ':visible:not(:last-child)' // Exclude the last visible column
+                            },
+                            download: 'open'
+                        }
+                    ]
+
+                });
+                $('#dataTable tbody').on('click', '.btn-edit', function () {
+                    var row = $(this).closest('tr');
+                    var id = row.data('id');
+                    var targetUrl = '/KursListesi
+                    window.location.href = targetUrl;
+                });
+            });
+        });
+
+
+    </script>
+}

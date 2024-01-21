@@ -1,0 +1,283 @@
+﻿
+@{
+    ViewData["Title"] = "InsertCoursesPicturesandLinks";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+
+@model Pan.Models.DbClasses.ViewModels.InsertCoursesPicturesAndLinksViewModel
+
+@section AdditionalCss{
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Kurs Foto-Link Yükle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="InsertTeacherForClasses">Kurs Resmi Yükle</a></li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <!-- - - - - - - - - - - - - -Pick Course - - - - - - - - - - - - - - - - -->
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Güncellenecek Kurs Seçiniz</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label style="padding:10px;">Kurs İsmi</label>
+                                        <select class="form-control rounded-0" id="pickCourse" style="max-width:500px;">
+                                            <option value="" selected disabled>---Seçim Yapınız---</option>
+                                            @foreach (var item in Model.CourseInfo)
+                                            {
+                                                <option>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <label style="padding:10px;">Eğitmen İsmi</label>
+                                        <select class="form-control rounded-0" id="pickCourseID" style="max-width:500px;">
+                                            <option value="" selected disabled>---Seçim Yapınız---</option>
+                                            @foreach (var item in Model.CourseInfo)
+                                            {
+                                                <option class="pickCourseIDOptions" data-id="@item.Key">@item.Key</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- - - - - - - - - - - - - -Pick Photo Type - - - - - - - - - - - - - - - - -->
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Eğitmen Resmi Yükle</h3>
+                    </div>
+
+
+                    <form enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Fotoğraf Tipi</label>
+                                            <select class="form-control rounded-0" id="pickPhotoStyle" style="max-width:500px;">
+                                                <option value="" selected disabled>---Seçim Yapınız---</option>
+                                                @foreach (var item in Model.PhotoNames)
+                                                {
+                                                    <option>@item.Key</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Fotoğraf Boyut</label>
+                                            @foreach (var item in Model.PhotoNames)
+                                            {
+                                                <input type="text" class="hidden photoDimensionInput" disabled value="@item.Value Pixel">
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="col-12" style="height:50px;">
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="file" class="btn" id="pickPhotoPath" style="background-color:rebeccapurple; font-weight:bold; color:wheat">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="sendPhoto" style="background-color:aliceblue;font-weight:bold;">Foto Gönder</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- - - - - - - - - - - - - -Video Link - - - - - - - - - - - - - - - - -->
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Video Linki Yükle</h3>
+                    </div>
+                    <form>
+                        <div class="card-body">
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Video Linki</label>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Adres</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" id="linkAddress">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="sendLink" style="background-color:aliceblue;font-weight:bold;">Link Gönder</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@Html.Partial("confirmationAndErrorModals")
+
+@section AdditionalScripts
+    {
+    <script>
+        $(document).ready(function () {
+
+
+            var selectedIndex = 0;
+            $('#pickPhotoStyle').on('change', function () {
+                selectedIndex = $(this).prop('selectedIndex');
+
+                $('.photoDimensionInput').addClass('hidden')
+                $('.photoDimensionInput').eq(selectedIndex - 1).removeClass('hidden')
+            });
+
+            // fotoğraf gönder
+            $('#sendPhoto').on('click', function (event) {
+
+                event.preventDefault();
+
+                var className = $('#pickCourse').val();
+
+                var selectedIndex = $('#pickCourse').prop('selectedIndex');
+                var classID = $('.pickCourseIDOptions').eq(selectedIndex - 1).data('id');
+
+                if (className === null) {
+                    alert('Sınıf Seçiniz!');
+                    return;
+                }
+
+                var photoName = $('#pickPhotoStyle').val();
+                if (photoName === null) {
+                    alert('Fotoğraf Tipi Seçiniz!');
+                    return;
+                }
+                var fileInput = $('#pickPhotoPath')[0].files[0];
+
+                var formData = new FormData();
+                formData.append('className', className);
+                formData.append('classID', classID);
+                formData.append('photoName', photoName);
+                formData.append('file', fileInput);
+
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Panel/InsertCoursePicturesandLinks/UpdatePhotos?_=" + new Date().getTime(),
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.success) {
+
+                            alert(data.message);
+                        } else {
+
+                            alert('Hata: ' + data.message);
+                        }
+                    },
+                    error: function () {
+
+                        alert('Fotoğraf Yüklenirken Hata İle Karşılaşıldı...');
+                    }
+                });
+            });
+
+            //link gönder
+            $('#sendLink').on('click', function (event) {
+
+                event.preventDefault();
+                var className = $('#pickCourse').val();
+
+                var selectedIndex = $('#pickCourse').prop('selectedIndex');
+                var courseID = $('.pickCourseIDOptions').eq(selectedIndex - 1).data('id');
+
+                if (teacherName === null) {
+                    alert('Kurs Seçiniz!');
+                    return;
+                }
+
+                var linkAddress = $('#linkAddress').val();
+                if (linkAddress === null) {
+                    alert('Adres boş olamaz!');
+                    return;
+                }
+
+                var formData = new FormData();
+                formData.append('className', className);
+                formData.append('courseID', courseID);
+                formData.append('linkAddress', linkAddress);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Panel/InsertCoursePicturesandLinks/UpdateLinks?_=" + + new Date().getTime(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                        } else {
+                            alert('Hata: ' + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Link Yüklenirken Hata İle Karşılaşıldı...');
+                    }
+                });
+            });
+
+        });
+    </script>
+}
+
+
+
+

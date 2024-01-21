@@ -1,0 +1,466 @@
+﻿
+@{
+    ViewData["Title"] = "Classes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Pan.Models.DbClasses.Classes
+
+
+@section Title{
+    <title>@ViewBag.ClassName</title>
+}
+@section KeywordsandDescription{
+    <meta name="keywords" content="Yoga Eğitimi,Online Pilates Eğitimi,Online Yoga Kursu,Yoga Challenge,Pilates Eğitimi,Aletli Reformer">
+    <meta name="description" content="@ViewBag.Description">
+}
+
+<!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+<div class="breadcrumbs-wrap no-title">
+
+    <div class="container">
+
+        <ul class="breadcrumbs">
+
+            <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+            <li><a asp-controller="Home" asp-action="ClassesAll">Kurslar</a></li>
+            <li>@ViewBag.ClassName</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- - - - - - - - - - - - - end Breadcrumbs - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - Content - - - - - - - - - - - - - - - - -->
+
+<div id="content" class="page-content-wrap">
+
+    <div class="container">
+
+        <div class="entry-box single-post">
+
+            <div class="entry">
+
+                <!-- - - - - - - - - - - - - - Class Info - - - - - - - - - - - - - - - - -->
+                <div class="entry-body align-center">
+
+                    <h1 class="entry-title">@ViewBag.ClassName</h1>
+                    <div class="flex-row justify-content-center">
+                        <div class="entry-meta">
+
+                            <span>@Model.Schedule.ToString("dd.MM.yyyy"),</span>
+                            <a href="https://localhost:7032/Home/InstructorPage/@ViewBag.TeacherID" target="_blank" rel="noreferrer noopener">@ViewBag.TeacherName</a>
+                            <span>ile</span>
+                            <a href="~/Home/ClassTypes/#@Model.ClassTypeID">@ViewBag.ClassTypeName</a>
+                           
+           
+                        </div>
+                        <div class="our-info">
+
+                            <div class="info-item">
+                                <i class="licon-clock3"></i>
+                                <div class="wrapper">
+                                    <span>@Model.DurationMinutes</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="licon-signal"></i>
+                                <div class="wrapper">
+                                    <span>@ViewBag.Level</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- - - - - - - - - - - - - - Class Video - - - - - - - - - - - - - - - - -->
+                <div class="thumbnail-attachment video-holder">
+                    <img src="~/images/Classes/default_class_picture.jpg" alt="@ViewBag.ClassName"><a href="https://www.youtube.com/watch?v=KtI_P1ulii4&t=10s" class="video-btn" data-fancybox="video"></a>
+                </div>
+                
+                <div class="row">
+                    <!-- - - - - - - - - - - - - - Class Description - Share - - - - - - - - - - - - - - - - -->
+                    <div class="col-lg-8 col-md-12">
+
+                        <p>@ViewBag.Description</p>
+
+                        <div class="content-element6">
+
+                            <div class="share-wrap">
+
+                                <span class="share-title">Bu Kursu Paylaşın:</span>
+                                <ul class="social-icons var2 share">
+
+                                    <li><a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener" class="sh-instagram"><i class="icon-instagram"></i></a></li>
+                                    <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer noopener" class="sh-facebook"><i class="icon-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener" class="sh-twitter"><i class="icon-twitter"></i></a></li>
+                                    <li><a href="https://pinterest.com/" target="_blank" rel="noreferrer noopener" class="sh-pinterest"><i class="icon-pinterest"></i></a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="post-nav">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <a asp-controller="Home" asp-action="ClassAddToFavorite" asp-route-id="@ViewBag.ClassMasterID" class="post-button favorite"><i class="licon-star"></i></a>
+                                    <div class="switcher">
+                                        @if(Model.Schedule > DateTime.Now )
+                                        {
+                                            <a href="javascript:void(0)" class="post-button active">Açık</a>
+                                            <a href="javascript:void(0)" class="post-button">Tamamlandı</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript:void(0)" class="post-button">Açık</a>
+                                            <a href="javascript:void(0)" class="post-button active" style="background-color:#E882AE">Tamamlandı</a>
+                                        }
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <div class="align-right">
+@* 
+                                        <a href="#" class="link-text">Aynı Eğitmenden</a>
+                                        <h6><a href="#">@ViewBag.SameTeacherDifferentCourse</a></h6> *@
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="content-element10">
+
+                            <h4>Yorumlar</h4>
+
+                            <ol class="comments-list">
+
+                                <li class="comment">
+
+                                    <article>
+
+                                        <!-- - - - - - - - - - - - - - Avatar - - - - - - - - - - - - - - - - -->
+
+                                        <div class="gravatar">
+
+                                            <a href="#"><img src="images/100x100_photo2.jpg" alt=""></a>
+
+                                        </div>
+
+                                        <!-- - - - - - - - - - - - - - End of avatar - - - - - - - - - - - - - - - - -->
+                                        <!-- - - - - - - - - - - - - - Comment body - - - - - - - - - - - - - - - - -->
+
+                                        <div class="comment-body">
+
+                                            <header class="comment-meta">
+
+                                                <h6 class="comment-author"><a href="#">Cimcime Küçükyoga</a></h6>
+                                                <div class="comment-info">
+                                                    <time datetime="2015-10-17 02:41" class="comment-date">@DateTime.Now</time>
+                                                    <a href="#" class="comment-reply-link">Cevapla</a>
+                                                </div>
+
+                                            </header>
+
+                                            <p>Ashtanga Yoga Kursuna katıldım. Çok memnum kaldım. Teşekkür ederim.</p>
+
+                                        </div><!--/ .comment-body-->
+                                        <!-- - - - - - - - - - - - - - End of comment body - - - - - - - - - - - - - - - - -->
+
+                                    </article>
+
+                                    <ol class="children">
+
+                                        <li class="comment">
+
+                                            <article>
+
+                                                <!-- - - - - - - - - - - - - - Avatar - - - - - - - - - - - - - - - - -->
+
+                                                <div class="gravatar">
+
+                                                    <a href="#"><img src="images/100x100_photo3.jpg" alt=""></a>
+
+                                                </div>
+
+                                                <!-- - - - - - - - - - - - - - End of avatar - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - Comment body - - - - - - - - - - - - - - - - -->
+
+                                                <div class="comment-body">
+
+                                                    <header class="comment-meta">
+
+                                                        <h6 class="comment-author"><a href="#">Admin</a></h6>
+                                                        <div class="comment-info">
+                                                            <time datetime="2015-10-17 02:41" class="comment-date">@DateTime.Now/time>
+                                                            <a href="#" class="comment-reply-link">Cevapla</a>
+                                                        </div>
+
+                                                    </header>
+
+                                                    <p>Reja. </p>
+
+                                                </div><!--/ .comment-body-->
+                                                <!-- - - - - - - - - - - - - - End of comment body - - - - - - - - - - - - - - - - -->
+
+                                            </article>
+
+                                        </li>
+
+                                    </ol>
+
+                                </li>
+
+                        </div>
+
+                        <h4>Yorumlarınınz Bizim İçin Önemli...</h4>
+                        <p>Email Adresiniz Yayınlanmayacaktır. <span class="required"></span> ile markalanmış alanlar zorunludur.</p>
+
+                        <form class="contact-form style-2">
+
+                            <div class="contact-item">
+
+                                <label class="required">Adınız</label>
+                                <input type="text">
+
+                            </div>
+
+                            <div class="contact-item">
+
+                                <label class="required">Mail Adresiniz</label>
+                                <input type="email">
+
+                            </div>
+
+                            <div class="contact-item">
+
+                                <label>Websitesi</label>
+                                <input type="url">
+
+                            </div>
+
+                            <div class="contact-item">
+
+                                <label class="required">Yorumunuz</label>
+                                <textarea rows="4"></textarea>
+
+                            </div>
+
+                            <div class="contact-item">
+
+                                <button type="submit" class="btn btn-style-3" data-type="submit">Gönder</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- - - - - - - - - - - - - - Sidebar - - - - - - - - - - - - - - - - -->
+                    <aside id="sidebar" class="col-lg-4 col-md-12">
+                        <!-- - - - - - - - - - - - - - Challenge - - - - - - - - - - - - - - - - -->
+                        <div class="widget">
+
+                            <div class="widget-bg">
+                                <div class="team-holder">
+
+                                    <div class="team-item">
+
+                                        <a href="#" class="member-photo">
+                                            <img src="images/100x100_photo4.jpg" alt="">
+                                        </a>
+                                        <div class="team-desc">
+                                            <div class="member-info">
+                                                <h6 class="member-name"><a href="#">Vicky Johnson</a></h6>
+                                                <h6 class="member-position">Hatha Yoga Teacher</h6>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="widget-bg">
+
+                                <h6 class="widget-title">7-Day Yoga Therapy Challenge</h6>
+
+                                <ul class="custom-list style-2">
+                                    <li><a href="#">Day 1. Your First Home Yoga Workout</a><a href="#" class="entry-icon check"><i class="licon-checkmark-circle"></i></a></li>
+                                    <li class="active">Day 2. Ten Minute Home Yoga Workout</li>
+                                    <li><a href="#">Day 3. Full Home Yoga Workout</a></li>
+                                    <li><a href="#">Day 4. Life Benefits of Yoga</a></li>
+                                    <li><a href="#">Day 5. Poses for Increasing Flexibility </a></li>
+                                    <li><a href="#">Day 6. Beginner’s Home Yoga Workout </a></li>
+                                    <li><a href="#">Day 7. Beginner’s Flexibility Class</a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <!-- - - - - - - - - - - - - - Related Courses - - - - - - - - - - - - - - - - -->
+                        @if(ViewBag.RelatedClasses.Count>0)
+                        {
+                            <div class="widget">
+                                <h6 class="widget-title">İLGİLİ Kurslar</h6>
+                                
+                                    <div class="entry-box entry-small style-2">
+
+                                        @foreach (var item in ViewBag.RelatedClasses)
+                                        {
+                                            <div class="entry">
+
+                                                <!-- - - - - - - - - - - - - - Entry attachment - - - - - - - - - - - - - - - - -->
+                                                <div class="thumbnail-attachment">
+                                                    <a href="https://localhost:7032/Home/Classes/@item.ClassMasterID" target="_blank" rel="noreferrer noopener">
+                                                    <img src="@(!string.IsNullOrEmpty(item.Photopath1) ? Url.Content($"~/images/Classes/{item.ClassName}{item.ClassMasterID}/{item.Photopath1}") : Url.Content("~/images/Classes/default_class_picture.jpg"))" style="width:100px;height:75px;" alt="@item.ClassName">
+
+                                                </a>
+                                                </div>
+
+                                                <!-- - - - - - - - - - - - - - Entry body - - - - - - - - - - - - - - - - -->
+                                                <div class="entry-body">
+
+                                                    <h6 class="entry-title"><a href="https://localhost:7032/Home/Classes/@item.ClassMasterID" target="_blank" rel="noreferrer noopener">
+                                                                                @item.ClassName 
+                                                                            </a>
+                                                    </h6>
+                                                    <div class="entry-meta">
+
+                                                        <a href="https://localhost:7032/Home/InstructorPage/@item.InstructorID" target="_blank" rel="noreferrer noopener">
+                                                            @{
+                                                                var teacherValue = "";
+                                                                foreach (var teacher in ViewBag.RelatedClassesTeacher)
+                                                                {
+                                                                    if (teacher.Key == item.InstructorID)
+                                                                    {
+                                                                        teacherValue = teacher.Value;
+                                                                        break;
+                                                                    }
+    
+                                                                }
+
+                                                                @teacherValue
+                                                            }
+                                                        </a>
+                                                        <span>ile</span>
+                                                        <a href="https://localhost:7032/Home/ClassTypes" target="_blank" rel="noreferrer noopener" class="entry-cat">
+                                                            @{
+                                                                var classTypeValue = "";
+                                                                foreach (var classType in ViewBag.RelatedClassesTypes)
+                                                                {
+                                                                    if (classType.Key == item.ClassTypeID)
+                                                                    {
+                                                                        classTypeValue = classType.Value;
+                                                                        break;
+                                                                    }
+
+                                                                    @classTypeValue
+                                                                }
+                                                            }
+                                                            @classTypeValue
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                            </div>
+                        }
+                        <!-- - - - - - - - - - - - - - Popular Courses - - - - - - - - - - - - - - - - -->
+                        @if (ViewBag.PopularClasses.Count > 0)
+                        {
+                            <div class="widget">
+                        
+                                <h6 class="widget-title">Popüler Kurslar</h6>
+
+                                <div class="entry-box entry-small style-2">
+                                    @foreach (var item in ViewBag.PopularClasses)
+                                    {
+                                        <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
+                                        <div class="entry">
+
+                                            <!-- - - - - - - - - - - - - - Entry attachment - - - - - - - - - - - - - - - - -->
+                                            <div class="thumbnail-attachment">
+                                                <a href="https://localhost:7032/Home/Classes/@item.ClassMasterID" target="_blank" rel="noreferrer noopener">
+                                                    <img src="@(!string.IsNullOrEmpty(item.Photopath1) ? Url.Content($"~/images/Classes/{item.ClassName}{item.ClassMasterID}/{item.Photopath1}") : Url.Content("~/images/Classes/default_class_picture.jpg"))" style="width:100px;height:75px;" alt="@item.ClassName">
+                                            </div>
+
+                                            <!-- - - - - - - - - - - - - - Entry body - - - - - - - - - - - - - - - - -->
+                                            <div class="entry-body">
+
+                                                <h6 class="entry-title">
+                                                    <a href="https://localhost:7032/Home/Classes/@item.ClassMasterID" target="_blank" rel="noreferrer noopener">
+                                                        @item.ClassName
+                                                    </a>
+                                                </h6>
+                                                <div class="entry-meta">
+
+                                                    <a href="https://localhost:7032/Home/InstructorPage/@item.InstructorID" target="_blank" rel="noreferrer noopener">
+                                                        @{
+                                                            var teacherValue = "";
+                                                            foreach (var teacher in ViewBag.PopularClassesTeacher)
+                                                            {
+                                                                if (teacher.Key == item.InstructorID)
+                                                                {
+                                                                    teacherValue = teacher.Value;
+                                                                    break;
+                                                                }
+
+                                                            }
+
+                                                            @teacherValue
+                                                        }
+                                                    </a>
+                                                    <span>ile</span>
+                                                    <a href="https://localhost:7032/Home/ClassTypes" target="_blank" rel="noreferrer noopener" class="entry-cat">
+                                                        @{
+                                                            var classTypeValue = "";
+                                                            foreach (var classType in ViewBag.PopularClassesTypes)
+                                                            {
+                                                                if (classType.Key == item.ClassTypeID)
+                                                                {
+                                                                    classTypeValue = classType.Value;
+                                                                    break;
+                                                                }
+
+                                                                @classTypeValue
+                                                            }
+                                                        }
+                                                        @classTypeValue
+                                                    </a>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        }
+                    </aside>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

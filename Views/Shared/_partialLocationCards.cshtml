@@ -1,0 +1,176 @@
+﻿@model Pan.Models.DbClasses.ViewModels.LocationCardsViewModel
+
+<div class="container">
+    <div class="map-info">
+      <h2 style="color:#59b19d;">Stüdyolar</h2>
+        @{
+            int columnsPerRow = 3;
+            int itemCount = Model.Studios.Count;
+            int rowCount = (int)Math.Ceiling((double)itemCount / columnsPerRow);
+        }
+
+        @for (int row = 0; row < rowCount; row++)
+        {
+            <div class="row" style="margin-top:30px;">
+                @for (int col = 0; col < columnsPerRow && (row * columnsPerRow + col) < itemCount; col++)
+                {
+                    var item = Model.Studios[row * columnsPerRow + col];
+            
+                        <div class="col-md-4 col-sm-12">
+
+                            <h4 class="title">@item.LocationName</h4>
+
+                            <div class="our-info vr-type">
+
+                                <div class="info-item">
+                                    <i class="licon-map-marker"></i>
+                                    <span class="post">Adres</span>
+                                    <h6>@item.Address</h6>
+                                    <a href="" class="link-text">Yol Tarifi Al</a>
+                                </div>
+                                <div class="info-item">
+                                    <i class="licon-telephone"></i>
+                                    <span class="post">Phone Number</span>
+                                    <h6 content="telephone=no">
+                                        @if (string.IsNullOrEmpty(item.PhoneNumber))
+                                        {
+                                            item.PhoneNumber = "Bulunamadı"; }
+                                        else
+                                        {
+                                            @item.PhoneNumber
+                                            ;}
+                                        @item.PhoneNumber
+                                    </h6>
+                                </div>
+                                <div class="info-item">
+                                    <i class="licon-at-sign"></i>
+                                    <span class="post">Email</span>
+                                    <h6>
+                                        @if (string.IsNullOrEmpty(item.Email))
+                                        {
+                                            item.Email = "Bulunamadı"; }
+                                        else
+                                        {
+                                            @item.Email;
+                                        }
+                                            @item.Email
+                                    </h6>
+                                </div>
+                                <div class="info-item">
+                                    <i class="licon-clock3"></i>
+                                    <span class="post">Çalışma Saatleri</span>
+                                        <h6>
+                                            @{
+                                                if (string.IsNullOrEmpty(item.WorkingHours))
+                                                {
+                                                    <text>Bulunamadı</text>
+                                                
+                                                }
+                                                else
+                                                {
+                                                    string[] splittedParts = item.WorkingHours.Split(':');
+                                                    if (splittedParts.Length == 2)
+                                                    {
+                                                        <text>@splittedParts[0] <br> @splittedParts[1]</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>Bulunamadı</text>
+                                                    }
+                                                }
+                                            }
+                                    </h6>
+
+                                </div>
+
+                            </div>
+                        
+                        </div>
+                }
+            </div>
+        }
+
+        <h2 style="color:#e084ae; margin-top:40px;">Etkinlik Alanları</h2>
+        @{
+            int columnsPerRowEvents = 3;
+            int eventCount = Model.EventPlaces.Count;
+            int rowCountEvents = (int)Math.Ceiling((double)eventCount / columnsPerRowEvents);
+        }
+
+            @for (int row = 0; row < rowCount; row++)
+            {
+            <div class="row" style="margin-top:30px;">
+                @for (int col = 0; col < columnsPerRowEvents && (row * columnsPerRowEvents + col) < eventCount; col++)
+                {
+                    var item = Model.EventPlaces[row * columnsPerRowEvents + col];
+                    <div class="col-md-4 col-sm-12">
+
+                    <h4 class="title">@item.LocationName</h4>
+
+                    <div class="our-info vr-type">
+
+                        <div class="info-item">
+                            <i class="licon-map-marker"></i>
+                            <span class="post">Adres</span>
+                            <h6>@item.Address</h6>
+                            <a href="" class="link-text">Yol Tarifi Al</a>
+                        </div>
+                        <div class="info-item">
+                            <i class="licon-telephone"></i>
+                            <span class="post">Phone Number</span>
+                            <h6 content="telephone=no">
+                                @if (string.IsNullOrEmpty(item.PhoneNumber))
+                                    {
+                                        item.PhoneNumber = "Bulunamadı"; }
+                                    else
+                                        {@item.PhoneNumber;}
+                                        @item.PhoneNumber
+                                </h6>
+                            </div>
+                            <div class="info-item">
+                                <i class="licon-at-sign"></i>
+                                <span class="post">Email</span>
+                                <h6>
+                                    @if (string.IsNullOrEmpty(item.Email))
+                                    { item.Email = "Bulunamadı"; }
+                                    else
+                                        {@item.Email;}
+                                        @item.Email
+                                </h6>
+                            </div>
+                            <div class="info-item">
+                                <i class="licon-clock3"></i>
+                                <span class="post">Çalışma Saatleri</span>
+                                <h6>
+                                    @{
+                                    if (string.IsNullOrEmpty(item.WorkingHours))
+                                    {
+                                        <text>Bulunamadı</text>
+
+                                    }
+                                    else
+                                    {
+                                        string[] splittedParts = item.WorkingHours.Split(':');
+                                        if (splittedParts.Length == 2)
+                                        {
+                                            <text>@splittedParts[0] <br> @splittedParts[1]</text>
+                                        }
+                                        else
+                                        {
+                                            <text>Bulunamadı</text>
+                                        }
+                                    }
+                                }
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                }
+            </div>
+            }
+    </div>
+</div>

@@ -1,0 +1,352 @@
+﻿
+@{
+    ViewData["Title"] = "InsertTeacherPictures";
+    Layout = "~/Views/Panel/_adminLayout.cshtml";
+}
+
+@model Pan.Models.DbClasses.ViewModels.InsertTeacherViewModel
+
+@section AdditionalCss{
+
+    <style>
+        #gonder:hover {
+            background-color: lavender;
+        }
+
+        .checkBoxDiv {
+            display: inline-block; /* Ensure the container only takes the space it needs */
+        }
+
+        .checkboxForInstructorInfo {
+            zoom: 1.6; /* Adjust the zoom factor as needed */
+        }
+    </style>
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Eğitmen Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="InsertTeacherForClasses">Eğitmen Resmi Yükle</a></li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="card" style="background-color:#CCCCFF">
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">Eğitmen Resmi Yükle</h3>
+                    </div>
+
+
+                    <form>
+                        <div class="card-body">
+                            <!-- - - - - - - - - - - - - - Name - - - - - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">İsim</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.FirstName" placeholder="Eğitmen İsmi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">İkinci İsim</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.SecondName" placeholder="Varsa İkinci İsmi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Soyisim</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.LastName" placeholder="Eğitmen Soyismini Giriniz...">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- - - - - - - - ----  Email Phone Title- - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Email</label>
+                                            <input type="email" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.Email" placeholder="Mail Adresi Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Tel</label>
+                                            <input type="tel" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.Phone" placeholder="Telefon Numarası Giriniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Ünvan</label>
+                                            <input type="text" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.Title" placeholder="Ünvan Giriniz...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - ---- - Studio Parent Teacher- - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Çalışılan Stüdyolar</label>
+                                            <select class="form-control rounded-0" id="studiosWorkFor" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.LocationsToWork)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Bağlı Olunan Eğitmenler</label>
+                                            <select class="form-control rounded-0" id="parentTeacherNames" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.ExistingTeachers)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <div class="col-12">
+                                                <label style="padding:10px;">Alt Eğitmen?</label>
+                                            </div>
+                                            <div class="col-12 checkBoxDiv">
+                                                <input type="checkbox" id="isParent" class="checkboxForInstructorInfo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - - ---- - Studio Parent Teacher- - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <div class="col-12">
+                                                <label style="padding:10px;">Stüdyo Sahibi?</label>
+                                            </div>
+                                            <div class="col-12 checkBoxDiv">
+                                                <input type="checkbox" id="isStudioOwner" class="checkboxForInstructorInfo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Sahip Olunan Stüdyolar</label>
+                                            <select class="form-control rounded-0" id="studiosOwned" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.LocationsToWork)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - ---- ---- - Bio Slogan - - - - - - - - - - - - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Bio</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.Bio" placeholder="Biografi Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Slogan</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.Slogan" placeholder="Ana Slogan Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Slogan Alt Metin</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.SloganSub" placeholder="Alt Slogan Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - ---- ---- - Pylosophy & Education Style -  - - - - - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Yaşam Felsefesi</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStyleMainSentence" placeholder="Hayata Bakış Açınızı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Eğitim Felsefesi</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStylePhilosophy" placeholder="Eğitimleri İcra Ediş Tarzınızı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Eğitim Stili</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStyleEducationStyle" placeholder="Eğitimlerde Öğrencilere Yaklaşım Tarzınızı Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Eğitim Odağı</label>
+                                            <textarea rows="4" class="form-control form-control-border border-width-2" asp-for="@Model.TeacherToRecord.PhilosophyAndEducationStyleFocus" placeholder="Eğitimlerde Odaklandığınız Hususları Giriniz..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - ---- ---- - Kurslar - - ---- - - - - - - - - - - - -->
+                            <div class="container" style="background-color:aliceblue; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Öne Çıkarılacak Kurs</label>
+                                            <select class="form-control rounded-0" asp-for="@Model.TeacherToRecord.FeaturedCourse" style="max-width:500px;">
+                                                @foreach (var item in Model.ClassesToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label style="padding:10px;">Verilen Kurslar</label>
+                                            <select class="form-control rounded-0" name="coursesToSelect[]" id="coursesToSelect" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.ClassesToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- - - - - - - ---- ---- - Etkinlik Challange - - ---- - -- - - - -->
+                            <div class="container" style="background-color:lavender; margin-left:0; margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Sunulan Etkinlikler</label>
+                                            <select class="form-control rounded-0" name="eventsToSelect[]" id="eventsToSelect" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.EventsToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+
+                                            <label style="padding:10px;">Sunulan Meydan Okumalar</label>
+                                            <select class="form-control rounded-0" name="eventsToSelect[]" id="eventsToSelect" multiple style="max-width:500px;">
+                                                @foreach (var item in Model.ChallengesToOffer)
+                                                {
+                                                    <option>@item</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn" id="gonder" style="background-color:aliceblue;font-weight:bold;">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Uyarı</h5>
+                <button type="button" class="close confirmation-modal-no-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-modal-warning-paragraph"></p>
+                <p>Devam Etmek İstiyor Musunuz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary confirmation-modal-no-button" data-dismiss="modal">Hayır</button>
+                <button type="button" class="btn btn-primary confirmation-modal-yes-button">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="error-modal-label">Hata</h5>
+                <button type="button" class="close error-modal-ok-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body error-modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger error-modal-ok-button" data-dismiss="modal">Tamam</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section AdditionalScripts
+    {
+    <script>
+
+
+
+
+    </script>
+}
+
+
+

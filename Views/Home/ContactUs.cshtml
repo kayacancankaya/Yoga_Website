@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "ContactUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Pan.Models.DbClasses.ViewModels.ContactUsPageViewModel
+
+@section Title{
+    <title>Pan Yoga</title>
+}
+@section KeywordsandDescription{
+    <meta name="keywords" content="Yoga Eğitimi,Etkinlik,Challenge,Pilates Eğitimi,Aletli Reformer,Pilates Ürünleri">
+    <meta name="description" content="Pan Yoga Yoga ve Pilates Eğitimleri ile Doğa Dostu Yoga Ürünleri sunan bir spor markasıdır.">
+}
+<!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+
+<div class="breadcrumbs-wrap">
+
+    <div class="container">
+
+        <h1 class="page-title">İletişime Geçin</h1>
+
+        <ul class="breadcrumbs">
+
+            <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+            <li>İletişime Geçin</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- - - - - - - - - - - - - end Breadcrumbs - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - Content - - - - - - - - - - - - - - - - -->
+<div id="content">
+
+      <div class="map-section content-element10">
+        
+        <div id="googleMap2" class="map-container"></div>
+
+        
+
+      </div>
+
+    @Html.Partial("_partialLocationCards",Model.locationCards);
+    @Html.Partial("_partialContactUs", Model.contactUs);

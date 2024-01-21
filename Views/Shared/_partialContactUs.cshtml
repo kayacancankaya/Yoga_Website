@@ -1,0 +1,109 @@
+﻿@model Pan.Models.DbClasses.ViewModels.ContactUsViewModel
+<div class="page-section parallax-section text-color-light" style="background-color:#59b19d">
+
+    <div class="container wide2">
+
+        <div class="row">
+            <div class="col-lg-7 col-md-12">
+
+                <div class="content-element5">
+
+                    <div class="section-pre-title">Sorunuz mu Var?</div>
+                    <h2 class="section-title">İletişime Geçin</h2>
+
+                </div>
+
+                <p class="content-element3">Size yardımcı olmaktan memnuniyet duyarız.</p>
+
+                <form id="contact-form" class="contact-form">
+
+                    <div class="contact-item">
+
+                        <label>Adınız*</label>
+                        <input type="text" asp-for="@Model.YourName">
+
+                    </div>
+
+                    <div class="contact-item">
+
+                        <label>Mail Adresiniz *</label>
+                        <input type="email" asp-for="@Model.YourEmail">
+
+                    </div>
+
+                    <div class="contact-item">
+
+                        <label>Konu</label>
+                        <select  id="SubjectDropDown" asp-for="@Model.Subject" data-default-text="Seçim Yapınız...">
+                            @{
+                                List<string> distinctInstructors = new();
+                                foreach (string item in Model.SubjectList)
+                                {
+                                    <option >@item</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="contact-item">
+
+                        <label>Metin</label>
+                        <textarea rows="4" asp-for="@Model.Body"></textarea>
+
+                    </div>
+
+                    <div class="contact-item">
+
+                        <button type="submit" class="btn btn-style-3" data-type="submit">Gönder</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="col-lg-4 col-md-12 offset-lg-1">
+
+                <div class="our-info style-2 vr-type var2">
+
+                    <div class="info-item">
+                        <i class="licon-map-marker"></i>
+                        <div class="wrapper">
+                            <span class="info-cat">Adres</span>
+                        </div>
+                        <h5 class="info-title">@Model.CompanyAddress</h5>
+                        <a href="" class="btn btn-small btn-style-6">Yol TARİFİ Al</a>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="licon-telephone"></i>
+                        <div class="wrapper">
+                            <span class="info-cat">Telefon Numarası</span>
+                        </div>
+                        <h5 class="info-title" content="telephone=no">@Model.PhoneNumber</h5>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="licon-at-sign"></i>
+                        <div class="wrapper">
+                            <span class="info-cat">Email Adresi</span>
+                        </div>
+                        <h5 class="info-title">@Model.Email</h5>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="licon-clock3"></i>
+                        <div class="wrapper">
+                            <span class="info-cat">Çalışma Saatleri</span>
+                        </div>
+                        <h5 class="info-title">@Model.WorkingHours</h5>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
